@@ -66,6 +66,9 @@ export function Footer() {
               {[
                 { href: '/', label: 'Startseite' },
                 { href: '/menu', label: 'Produkte' },
+                { href: '/materialien', label: 'Materialien' },
+                { href: '/showcase', label: 'Showcase' },
+                { href: '/faq', label: 'FAQ' },
                 { href: '/about', label: 'Über Uns' },
                 { href: '/visit', label: 'Standort & Kontakt' }
               ].map(link => (

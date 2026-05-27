@@ -16,7 +16,7 @@ interface LogoProps extends React.SVGProps<SVGSVGElement> {
 export function Logo({ variant = 'primary', pulse = false, className, onClick, ...props }: LogoProps) {
   const clicks = useRef<number[]>([]);
 
-  const handleTap = (e: React.MouseEvent<SVGSVGElement>) => {
+  const handleTap = (e: React.MouseEvent<HTMLImageElement>) => {
     const now = Date.now();
     clicks.current.push(now);
     clicks.current = clicks.current.filter(t => now - t <= 500);
@@ -27,35 +27,20 @@ export function Logo({ variant = 'primary', pulse = false, className, onClick, .
       clicks.current = [];
     }
 
-    if (onClick) onClick(e);
+    if (onClick) onClick(e as any);
   };
 
-  const fillColor = variant === 'primary' ? '#C41E3A' : variant === 'light' ? '#FAF8F5' : '#1A1A1A';
-  const textColor = variant === 'primary' ? '#FAF8F5' : variant === 'light' ? '#C41E3A' : '#FAF8F5';
-
   return (
-    <svg
+    <img
+      src="/Aykin-Logo.svg"
+      alt="Aykin Logo"
       onClick={handleTap}
-      viewBox="0 0 60 60"
-      xmlns="http://www.w3.org/2000/svg"
-      style={{ aspectRatio: '1 / 1' }}
       className={twMerge(
-        "cursor-pointer transition-transform active:scale-95",
+        "cursor-pointer transition-transform active:scale-95 h-12 w-auto object-contain",
         pulse && "animate-aykin-pulse",
         className
       )}
-      {...props}
-    >
-      <rect width="60" height="60" rx="14" fill={fillColor} />
-      <text
-        x="50%"
-        y="50%"
-        textAnchor="middle"
-        dominantBaseline="central"
-        style={{ fontFamily: 'var(--font-heading), sans-serif', fontSize: 16, fontWeight: 700, fill: textColor, letterSpacing: '0.05em' }}
-      >
-        AYKIN
-      </text>
-    </svg>
+      {...(props as any)}
+    />
   );
 }

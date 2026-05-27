@@ -16,9 +16,13 @@ export function MobileMenu({ isOpen, onClose, pathname }: MobileMenuProps) {
   const prefersReducedMotion = useReducedMotion();
 
   const links = [
-    { id: "menu", href: "/menu", label: "Produkte" },
-    { id: "about", href: "/about", label: "Über Uns" },
-    { id: "visit", href: "/visit", label: "Besuchen & Liefern" },
+    { id: "produkte", href: "/produkte", label: "Produkte" },
+    { id: "leistungen", href: "/leistungen", label: "Leistungen" },
+    { id: "materialien", href: "/materialien", label: "Materialien" },
+    { id: "showcase", href: "/showcase", label: "Showcase" },
+    { id: "faq", href: "/faq", label: "FAQ" },
+    { id: "ueber-uns", href: "/ueber-uns", label: "Über Uns" },
+    { id: "kontakt", href: "/kontakt", label: "Standort & Kontakt" },
   ];
 
   return (
@@ -63,10 +67,10 @@ export function MobileMenu({ isOpen, onClose, pathname }: MobileMenuProps) {
 
           <div className="relative z-10 mt-auto bg-sand rounded-2xl p-5 mb-4 border border-peach/50">
             <p className="font-bold text-sm text-charcoal mb-1">
-              Mi – Sa 12:00–19:00 · So 13:00–19:00
+              Mo – Fr 09:00–18:00
             </p>
             <p className="text-xs text-brown font-bold uppercase tracking-wider">
-              Mo + Di geschlossen
+              Termine nach Vereinbarung
             </p>
           </div>
         </motion.div>

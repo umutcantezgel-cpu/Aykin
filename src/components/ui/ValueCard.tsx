@@ -8,7 +8,7 @@ interface ValueCardProps {
 }
 
 export function ValueCard({ icon, title, text }: ValueCardProps) {
-  const IconComponent = (Icons[icon] as React.ElementType) || Icons.Sparkles;
+  const IconComponent = (Icons[icon] as any) || Icons.Sparkles;
 
   return (
     <div className="bg-[#FAF8F5] rounded-[22px] p-[30px_24px] shadow-[0_3px_14px_rgba(26,26,26,0.05)] transition-transform hover:-translate-y-1">

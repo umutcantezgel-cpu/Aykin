@@ -7,7 +7,7 @@ import { AchievementBanner } from "@/components/molecules/feedback/AchievementBa
 import CookieConsentBanner from "@/components/legal/CookieConsent";
 import CookieRevoke from "@/components/legal/CookieRevoke";
 import ScriptManager from "@/components/legal/ScriptManager";
-import { SyrupCursor } from "@/components/ui/SyrupCursor";
+import { MagicCursor } from "@/components/ui/MagicCursor";
 import "./globals.css";
 import "@/styles/cookieconsent-theme.css";
 import "@/styles/google-maps-overrides.css";
@@ -54,7 +54,7 @@ export default function RootLayout({
         <CookieRevoke />
         <ScriptManager />
         <AchievementBanner />
-        <SyrupCursor />
+        <MagicCursor />
       </body>
     </html>
   );
