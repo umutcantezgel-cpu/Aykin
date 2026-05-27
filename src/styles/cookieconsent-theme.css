@@ -1,0 +1,228 @@
+/* ═══════════════════════════════════════════════════════════════════
+   Aykin — Cookie Consent Premium Theme
+   Atomic Luxury Architecture · Glassmorphism + Motion
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ─── Design Tokens ─── */
+#cc-main {
+  --cc-font-family: var(--font-body), 'Inter', sans-serif;
+  --cc-bg: rgba(250, 248, 245, 0.92);
+  --cc-primary-color: #1A1A1A;
+  --cc-secondary-color: #4A4A4A;
+  --cc-btn-primary-bg: #C41E3A;
+  --cc-btn-primary-color: #fefefe;
+  --cc-btn-primary-hover-bg: #A01830;
+  --cc-btn-primary-hover-color: #fefefe;
+  --cc-btn-secondary-bg: rgba(242, 232, 224, 0.7);
+  --cc-btn-secondary-color: #1A1A1A;
+  --cc-btn-secondary-hover-bg: #E8D5C4;
+  --cc-btn-secondary-hover-color: #1A1A1A;
+  --cc-btn-border-radius: 50px;
+  --cc-modal-border-radius: 24px;
+  --cc-toggle-on-bg: #C41E3A;
+  --cc-toggle-off-bg: #E8D5C4;
+  --cc-toggle-readonly-bg: #8A8A8A;
+  --cc-cookie-category-block-bg: rgba(242, 232, 224, 0.5);
+  --cc-separator-border-color: rgba(232, 213, 196, 0.5);
+  --cc-overlay-bg: rgba(26, 26, 26, 0.6);
+  --cc-link-color: #C41E3A;
+  --cc-footer-bg: rgba(242, 232, 224, 0.5);
+  --cc-footer-color: #4A4A4A;
+  --cc-footer-border-color: rgba(232, 213, 196, 0.4);
+}
+
+/* ─── Consent Modal (Main Banner) ─── */
+#cc-main .cm {
+  backdrop-filter: blur(20px) saturate(1.4);
+  -webkit-backdrop-filter: blur(20px) saturate(1.4);
+  box-shadow: 
+    0 24px 64px rgba(26, 26, 26, 0.18),
+    0 0 0 1px rgba(255, 255, 255, 0.3) inset;
+  border: 1px solid rgba(232, 213, 196, 0.35);
+  animation: cc-slideUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: 0.8s;
+}
+
+@keyframes cc-slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* ─── Title — Space Grotesk Display ─── */
+#cc-main .cm__title,
+#cc-main .pm__title {
+  font-family: var(--font-heading), 'Space Grotesk', sans-serif;
+  color: #1A1A1A;
+  letter-spacing: -0.01em;
+}
+
+#cc-main .cm__title {
+  font-size: 1.3rem;
+}
+
+/* ─── Description ─── */
+#cc-main .cm__desc,
+#cc-main .pm__body {
+  font-size: 0.88rem;
+  line-height: 1.72;
+  color: #4A4A4A;
+}
+
+/* ─── Buttons — Juicy with micro-interactions ─── */
+#cc-main .cm__btn {
+  padding: 12px 28px;
+  font-weight: 800;
+  font-size: 0.84rem;
+  letter-spacing: 0.03em;
+  transition: all 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+#cc-main .cm__btn:active {
+  transform: scale(0.96);
+}
+
+/* Primary CTA — Premium Red with glow */
+#cc-main .cm__btn--accept-all {
+  box-shadow: 0 4px 16px rgba(196, 30, 58, 0.3);
+}
+
+#cc-main .cm__btn--accept-all:hover {
+  box-shadow: 0 6px 24px rgba(196, 30, 58, 0.4);
+  transform: translateY(-1px);
+}
+
+/* Secondary — Frosted glass */
+#cc-main .cm__btn--accept-necessary {
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(232, 213, 196, 0.5);
+}
+
+/* Preferences link button */
+#cc-main .cm__btn--manage {
+  font-weight: 700;
+  font-size: 0.78rem;
+  color: #C41E3A;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  padding: 8px 4px;
+}
+
+#cc-main .cm__btn--manage:hover {
+  color: #A01830;
+}
+
+/* ─── Preferences Modal ─── */
+#cc-main .pm {
+  backdrop-filter: blur(20px) saturate(1.4);
+  -webkit-backdrop-filter: blur(20px) saturate(1.4);
+  box-shadow: 
+    0 32px 80px rgba(26, 26, 26, 0.2),
+    0 0 0 1px rgba(255, 255, 255, 0.25) inset;
+  border: 1px solid rgba(232, 213, 196, 0.3);
+}
+
+#cc-main .pm__section-title {
+  font-family: var(--font-heading), 'Space Grotesk', sans-serif;
+  font-size: 1rem;
+  color: #1A1A1A;
+}
+
+#cc-main .pm__section-desc {
+  font-size: 0.84rem;
+  line-height: 1.7;
+}
+
+/* ─── Toggle Switches — Pill style ─── */
+#cc-main .pm__toggle .toggle__icon {
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+#cc-main .pm__toggle input:checked ~ .toggle__icon {
+  transform: translateX(100%);
+}
+
+/* ─── Cookie Tables — Premium styling ─── */
+#cc-main .pm__table {
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid rgba(232, 213, 196, 0.4);
+}
+
+#cc-main .pm__table td,
+#cc-main .pm__table th {
+  font-size: 0.78rem;
+  border-color: rgba(232, 213, 196, 0.3);
+  padding: 10px 14px;
+}
+
+#cc-main .pm__table th {
+  background: rgba(242, 232, 224, 0.6);
+  color: #1A1A1A;
+  font-weight: 800;
+  text-transform: uppercase;
+  font-size: 0.7rem;
+  letter-spacing: 0.05em;
+}
+
+#cc-main .pm__table tr:hover td {
+  background: rgba(242, 232, 224, 0.3);
+}
+
+/* ─── Links ─── */
+#cc-main a.cc-link {
+  color: #C41E3A;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1.5px;
+  transition: color 0.2s ease;
+}
+
+#cc-main a.cc-link:hover {
+  color: #A01830;
+}
+
+/* ─── Category Blocks — Card style ─── */
+#cc-main .pm__section {
+  border-radius: 16px;
+  transition: background 0.3s ease;
+}
+
+#cc-main .pm__section:hover {
+  background: rgba(242, 232, 224, 0.25);
+}
+
+/* ─── Close button — Subtle ─── */
+#cc-main .pm__close-btn {
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+#cc-main .pm__close-btn:hover {
+  transform: rotate(90deg);
+  background: rgba(196, 30, 58, 0.1);
+}
+
+/* ─── Responsive fine-tuning ─── */
+@media (max-width: 640px) {
+  #cc-main .cm {
+    margin: 12px;
+    border-radius: 20px;
+  }
+  
+  #cc-main .cm__btn {
+    padding: 12px 20px;
+    font-size: 0.82rem;
+  }
+  
+  #cc-main .cm__title {
+    font-size: 1.15rem;
+  }
+}

@@ -1,0 +1,200 @@
+@import "tailwindcss";
+
+@config "../../tailwind.config.ts";
+
+/* ═══════════════════════════════════════════════════════════
+   Aykin — Global CSS
+   Source of Truth: MASTER_CONTEXT.md v2.0, §5–§9 + §12.4
+   ═══════════════════════════════════════════════════════════ */
+
+/* ─── CSS Custom Properties ─────────────────────────────── */
+:root {
+  /* Brand Colors (Styleguide V3) */
+  --color-bg-primary:     #FAF8F5;
+  --color-bg-secondary:   #F2E8E0;
+  --color-bg-accent:      #E8D5C4;
+  --color-primary:        #C41E3A;
+  --color-primary-deep:   #A01830;
+  --color-text-primary:   #1A1A1A;
+  --color-text-secondary: #2D2D2D;
+  --color-text-muted:     #4A4A4A;
+  --color-text-subtle:    #8A8A8A;
+  
+  /* Typography Variables */
+  --font-heading: 'Space Grotesk', sans-serif;
+  --font-body: 'Inter', sans-serif;
+
+  /* Shadow Palette (§7.2) */
+  --shadow-sm:   0 2px 8px  0 rgba(196, 30, 58, 0.08);
+  --shadow-md:   0 8px 24px 0 rgba(196, 30, 58, 0.12);
+  --shadow-lg:   0 16px 40px 0 rgba(196, 30, 58, 0.18);
+  --shadow-cta:  0 6px 20px 0 rgba(196, 30, 58, 0.30);
+
+  /* Easings (§9.1) */
+  --ease-aykin:     cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-aykin-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-aykin-in:  cubic-bezier(0.7, 0, 0.84, 0);
+  --ease-bounce:    cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* ─── Base Resets & Typografie-Hierarchie ────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  font-family: var(--font-body);
+  line-height: 1.5;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Headings Fluid Typography */
+h1, h2, h3, h4, h5, h6, .font-heading {
+  font-family: var(--font-heading);
+  line-height: 1.1;
+  font-weight: 900;
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+h1 { font-size: clamp(2.5rem, 6vw, 4rem); letter-spacing: -0.02em; }
+h2 { font-size: clamp(2rem, 4vw, 3rem); letter-spacing: -0.01em; }
+h3 { font-size: clamp(1.5rem, 3vw, 2.25rem); }
+h4 { font-size: clamp(1.25rem, 2vw, 1.75rem); }
+h5 { font-size: clamp(1.125rem, 1.5vw, 1.25rem); }
+h6 { font-size: 1rem; }
+
+/* Interactive elements */
+a, button, input, textarea, select {
+  font-family: var(--font-body);
+}
+
+/* ─── Custom SyrupCursor (§24) ──────────────────────────── */
+@media (min-width: 768px) and (hover: hover) and (pointer: fine) {
+  body {
+    cursor: none;
+  }
+}
+
+/* ─── Scrollbar (Brand-Tinted) ──────────────────────────── */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--color-bg-secondary); }
+::-webkit-scrollbar-thumb { background: var(--color-bg-accent); border-radius: 3px; }
+
+/* ─── Selection ─────────────────────────────────────────── */
+::selection { background: rgba(196, 30, 58, 0.25); color: #1A1A1A; }
+
+/* ─── Focus Visibility (A11y) ───────────────────────────── */
+button:focus-visible, a:focus-visible, [role="button"]:focus-visible {
+  outline: 3px solid #C41E3A;
+  outline-offset: 3px;
+  border-radius: 50px;
+}
+
+/* ─── Gooey Filter (SyrupCursor, §24) ──────────────────── */
+.gooey-filter {
+  position: absolute;
+  visibility: hidden;
+  width: 0;
+  height: 0;
+}
+
+/* ═══ §12.4 · DOT PATTERN UTILITIES ═════════════════════ */
+@layer utilities {
+  .bg-dot-pattern {
+    background-image: radial-gradient(
+      circle at 1px 1px,
+      rgba(196, 30, 58, 0.14) 1.5px,
+      transparent 1.5px
+    );
+    background-size: 24px 24px;
+  }
+  .bg-dot-pattern-subtle {
+    background-image: radial-gradient(
+      circle at 1px 1px,
+      rgba(196, 30, 58, 0.07) 1.5px,
+      transparent 1.5px
+    );
+    background-size: 32px 32px;
+  }
+}
+
+/* Alias for backward compat (used in existing pages) */
+.dot-bg {
+  background-image: radial-gradient(circle, rgba(196, 30, 58, 0.13) 1.5px, transparent 1.5px);
+  background-size: 24px 24px;
+}
+
+/* ─── Scroll Hide Utility ───────────────────────────────── */
+.scroll-hide { scrollbar-width: none; -ms-overflow-style: none; }
+.scroll-hide::-webkit-scrollbar { display: none; }
+
+/* ═══ CUSTOM KEYFRAMES ══════════════════════════════════ */
+
+/* §10.3 · Logo Pulse (Splash, Loading) */
+@keyframes aykin-pulse {
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(1.04); }
+}
+.animate-aykin-pulse {
+  animation: aykin-pulse 2.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Skeleton Shimmer (SkeletonCard loading state) */
+@keyframes aykin-shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+.animate-aykin-shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--color-bg-secondary) 25%,
+    var(--color-bg-accent) 50%,
+    var(--color-bg-secondary) 75%
+  );
+  background-size: 200% 100%;
+  animation: aykin-shimmer 1.8s var(--ease-aykin) infinite;
+}
+
+/* Order Ready Pulse (Success notification) */
+@keyframes aykin-ready-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.5); }
+  50%      { box-shadow: 0 0 0 12px rgba(37, 211, 102, 0); }
+}
+.animate-aykin-ready-pulse {
+  animation: aykin-ready-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Blob Float (decorative backgrounds) */
+@keyframes blobFloat {
+  0%, 100% { transform: translate(0, 0); }
+  33%      { transform: translate(6px, -10px); }
+  66%      { transform: translate(-5px, 7px); }
+}
+.animate-blob-float { animation: blobFloat 9s ease-in-out infinite; }
+.animate-blob-float-reverse { animation: blobFloat 12s ease-in-out infinite reverse; }
+
+/* Fade In (page entrance) */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: none; }
+}
+.animate-fade-in { animation: fadeIn 0.4s ease both; }
+
+/* ═══ REDUCED MOTION GLOBAL GUARD ═══════════════════════ */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.15s !important;
+    scroll-behavior: auto !important;
+  }
+}

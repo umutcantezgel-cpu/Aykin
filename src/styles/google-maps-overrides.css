@@ -1,0 +1,39 @@
+/* ─── Hide Google Maps UI clutter ─── */
+/* Keyboard shortcuts link */
+.gm-style .gmnoprint a,
+.gm-style .gmnoprint span,
+.gm-style .gm-style-cc {
+  display: none !important;
+}
+
+/* Attribution / legal text at bottom */
+.gm-style .gmnoscreen,
+.gm-style div[style*="position: relative"] > div:last-child > div {
+  display: none !important;
+}
+
+/* "Map data ©2026" text */
+.gm-style a[href*="maps.google.com/maps"],
+.gm-style a[href*="google.com/intl"],
+.gm-style .gm-style-cc,
+.gm-style .gm-bundled-control .gmnoprint {
+  display: none !important;
+}
+
+/* Terms of use link */
+.gm-style a[title="Open this area in Google Maps (opens a new window)"] {
+  display: none !important;
+}
+
+/* Keyboard shortcuts button */
+button[title="Keyboard shortcuts"],
+button[title="Tastenkombinationen"] {
+  display: none !important;
+}
+
+/* Google logo — minimal size */
+.gm-style img[alt="Google"] {
+  opacity: 0.3 !important;
+  transform: scale(0.7) !important;
+  transform-origin: bottom left !important;
+}

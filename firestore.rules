@@ -1,0 +1,77 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Helper Functions
+    function isAdmin() {
+      return request.auth != null
+          && exists(/databases/$(database)/documents/users/$(request.auth.uid))
+          && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin';
+    }
+
+    function isOwner(uid) {
+      return request.auth != null && request.auth.uid == uid;
+    }
+
+    // Menu — public read, admin write
+    match /menu_items/{document=**} {
+      allow read:  if true;
+      allow write: if isAdmin();
+    }
+
+    // Orders — guests can create, only owner/admin can read, only admin can update
+    match /orders/{orderId} {
+      allow create: if true;
+      allow read:   if (resource != null && isOwner(resource.data.userId)) || isAdmin();
+      allow update: if isAdmin();
+      allow delete: if isAdmin();
+    }
+
+    // Users — owner or admin
+    match /users/{userId} {
+      allow read, write: if isOwner(userId) || isAdmin();
+    }
+
+    // Store-Settings — public read, admin write
+    match /store_settings/{document=**} {
+      allow read:  if true;
+      allow write: if isAdmin();
+    }
+
+    // Analytics — admin only
+    match /analytics_daily/{document=**} {
+      allow read, write: if isAdmin();
+    }
+
+    // Reviews — anyone can read approved, auth can create, admin can update
+    match /reviews/{reviewId} {
+      allow read:   if (resource != null && resource.data.approved == true) || isAdmin();
+      allow create: if request.auth != null;
+      allow update, delete: if isAdmin();
+    }
+
+    // Promo codes
+    match /promo_codes/{code} {
+      allow read:  if true;
+      allow write: if isAdmin();
+    }
+
+    // Delivery zones
+    match /delivery_zones/{zone} {
+      allow read:  if true;
+      allow write: if isAdmin();
+    }
+
+    // Support
+    match /support_messages/{msg} {
+      allow create: if true;
+      allow read, update, delete: if isAdmin();
+    }
+
+    // Loyalty
+    match /loyalty_points/{uid} {
+      allow read:  if isOwner(uid) || isAdmin();
+      allow write: if isAdmin();
+    }
+  }
+}
