@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useRef, useState, useEffect } from 'react';
-import { motion, useScroll, useTransform, useSpring, useMotionValue, AnimatePresence } from 'framer-motion';
+import { motion, useScroll, useTransform, useSpring, useMotionValue, AnimatePresence, useMotionTemplate } from 'framer-motion';
 import { 
   Box, Droplets, PenTool, Cpu, ArrowRight, Zap, CheckCircle2, 
   Layers, Settings, Ruler, Wrench, ChevronRight, Activity, Crosshair, 
@@ -81,6 +81,10 @@ const TiltCard = ({ children, className, glowColor = "rgba(196,30,58,0.5)" }: an
     setHovered(true);
   };
 
+  const mouseXStr = useTransform(mouseXSpring, [-0.5, 0.5], ["0%", "100%"]);
+  const mouseYStr = useTransform(mouseYSpring, [-0.5, 0.5], ["0%", "100%"]);
+  const background = useMotionTemplate`radial-gradient(800px circle at ${mouseXStr} ${mouseYStr}, ${glowColor}, transparent 40%)`;
+
   return (
     <motion.div
       ref={ref}
@@ -101,9 +105,7 @@ const TiltCard = ({ children, className, glowColor = "rgba(196,30,58,0.5)" }: an
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             className="pointer-events-none absolute -inset-px rounded-[40px] opacity-0 transition duration-300"
-            style={{
-              background: `radial-gradient(800px circle at ${useTransform(mouseXSpring, [-0.5, 0.5], ["0%", "100%"])} ${useTransform(mouseYSpring, [-0.5, 0.5], ["0%", "100%"])}, ${glowColor}, transparent 40%)`,
-            }}
+            style={{ background }}
           />
         )}
       </AnimatePresence>

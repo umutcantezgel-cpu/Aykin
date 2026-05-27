@@ -1,0 +1,15 @@
+
+> aykin@0.1.0 dev
+> next dev -p 3005
+
+▲ Next.js 16.2.6 (Turbopack)
+- Local:         http://localhost:3005
+- Network:       http://172.20.10.5:3005
+- Environments: .env.local
+✓ Ready in 311ms
+
+(node:4842) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///Users/umurey/Downloads/Aykin/tailwind.config.ts?id=1779911197366 is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /Users/umurey/Downloads/Aykin/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+ GET /leistungen 200 in 325ms (next.js: 90ms, application-code: 235ms)
