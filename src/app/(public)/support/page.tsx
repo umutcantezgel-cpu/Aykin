@@ -35,46 +35,37 @@ const DECISION_TREE: Record<string, NodeType> = {
     question: 'Womit können wir dir helfen?',
     subtitle: 'Wähle einen Bereich, um die Fehlerbehebung oder Beratung zu starten.',
     options: [
-      { id: 'opt_food', label: 'Essen & Lieferung', icon: Coffee, nextId: 'food_root' },
+      { id: 'opt_food', label: 'Auftragsstatus', icon: Package, nextId: 'food_root' },
       { id: 'opt_3d', label: '3D-Druck & Design', icon: Printer, nextId: 'print_root' },
       { id: 'opt_general', label: 'Allgemeine Fragen', icon: Search, nextId: 'general_root' },
     ]
   },
   
-  // --- FOOD BRANCH ---
+  // --- ORDER STATUS BRANCH ---
   food_root: {
     id: 'food_root',
-    question: 'Was genau betrifft dein Anliegen rund ums Essen?',
+    question: 'Was genau betrifft deinen aktuellen Auftrag?',
     options: [
-      { id: 'f1', label: 'Wo bleibt meine Lieferung?', icon: Package, nextId: 'food_delivery_status' },
-      { id: 'f2', label: 'Etwas fehlt oder ist falsch', icon: AlertCircle, nextId: 'food_issue' },
-      { id: 'f3', label: 'Fragen zu Allergenen / Zutaten', icon: Search, nextId: 'food_allergens' },
-      { id: 'f4', label: 'Tischreservierung', icon: MapPin, result: { title: 'Tischreservierung', description: 'Wir nehmen aktuell Reservierungen am besten telefonisch oder per WhatsApp entgegen.', action: { label: 'Auf WhatsApp schreiben', href: 'https://wa.me/4917625026991', type: 'whatsapp' } } }
+      { id: 'f1', label: 'Wo bleibt mein Bauteil?', icon: Package, nextId: 'food_delivery_status' },
+      { id: 'f2', label: 'Fehler in der Produktion', icon: AlertCircle, nextId: 'food_issue' },
+      { id: 'f4', label: 'Besprechung / Termin', icon: MapPin, result: { title: 'Besprechung vor Ort', description: 'Für komplexe Projekte vereinbaren wir am besten einen persönlichen Termin.', action: { label: 'Auf WhatsApp schreiben', href: 'https://wa.me/4917625026991', type: 'whatsapp' } } }
     ]
   },
   food_delivery_status: {
     id: 'food_delivery_status',
-    question: 'Wo hast du bestellt?',
+    question: 'Wie hast du bestellt?',
     options: [
-      { id: 'fds1', label: 'Lieferando', result: { title: 'Lieferando Bestellung', description: 'Bitte nutze den Lieferando-Tracker in der App. Falls sich der Status lange nicht ändert, rufe uns kurz an.', action: { label: 'Im Studio anrufen', href: 'tel:+4964417890426', type: 'phone' } } },
-      { id: 'fds2', label: 'Telefonisch / WhatsApp', result: { title: 'Direkte Bestellung', description: 'Wir beeilen uns! Ruf uns am besten kurz an und nenne deinen Namen und Bestellzeitpunkt.', action: { label: 'Jetzt anrufen', href: 'tel:+4964417890426', type: 'phone' } } }
+      { id: 'fds1', label: 'Online / Mail', result: { title: 'Online Bestellung', description: 'Du erhältst automatisch eine Tracking-Nummer, sobald dein Bauteil versendet wird. Bei Express-Bestellungen ruf uns kurz an.', action: { label: 'Im Studio anrufen', href: 'tel:+4964417890426', type: 'phone' } } },
+      { id: 'fds2', label: 'Persönlich / WhatsApp', result: { title: 'Direkte Bestellung', description: 'Wir arbeiten auf Hochtouren! Schreib uns kurz für ein Update zu deinem Projekt.', action: { label: 'Nachfragen', href: 'https://wa.me/4917625026991', type: 'whatsapp' } } }
     ]
   },
   food_issue: {
     id: 'food_issue',
     question: 'Das tut uns leid! Was ist passiert?',
     options: [
-      { id: 'fi1', label: 'Falsches Gericht', result: { title: 'Ups, da ist was schiefgelaufen!', description: 'Bitte melde dich sofort bei uns. Wir liefern das richtige Gericht schnellstmöglich nach oder erstatten den Betrag.', action: { label: 'Fehler per WhatsApp melden', href: 'https://wa.me/4917625026991', type: 'whatsapp' } } },
-      { id: 'fi2', label: 'Zutat fehlt (z.B. Soße)', result: { title: 'Oh nein, das Wichtigste fehlt!', description: 'Schreib uns kurz. Wir finden eine unkomplizierte Lösung für dich (z.B. Gutschein für die nächste Bestellung oder Nachlieferung).', action: { label: 'Support kontaktieren', href: 'https://wa.me/4917625026991', type: 'whatsapp' } } },
-      { id: 'fi3', label: 'Essen ist kalt', result: { title: 'Kaltes Essen?', description: 'Das entspricht nicht unserem Standard. Bitte kontaktiere uns sofort, damit wir prüfen können, woran es lag und es wiedergutmachen können.' } }
-    ]
-  },
-  food_allergens: {
-    id: 'food_allergens',
-    question: 'Suchst du nach bestimmten Allergenen?',
-    options: [
-      { id: 'fa1', label: 'Gluten / Laktose', result: { title: 'Gluten- und Laktosefrei', description: 'Viele unserer Gerichte können glutenfrei oder laktosefrei zubereitet werden. Bitte gib dies immer explizit bei der Bestellung im Kommentarfeld an!' } },
-      { id: 'fa2', label: 'Nüsse / Spezifische Allergien', result: { title: 'Spezifische Allergien', description: 'Wir kochen in einer Küche, in der auch Nüsse verarbeitet werden. Bitte rufe uns vor deiner Bestellung an, um sicherzugehen.', action: { label: 'Anrufen & Abklären', href: 'tel:+4964417890426', type: 'phone' } } }
+      { id: 'fi1', label: 'Maßabweichung', result: { title: 'Toleranz prüfen', description: 'Bitte melde dich bei uns mit Fotos und Messungen. FDM-Drucke können leicht schrumpfen. Wir finden eine Lösung.', action: { label: 'Fehler per WhatsApp melden', href: 'https://wa.me/4917625026991', type: 'whatsapp' } } },
+      { id: 'fi2', label: 'Teil fehlt', result: { title: 'Baugruppe unvollständig', description: 'Schreib uns kurz. Wir drucken fehlende Teile sofort nach und senden sie per Express.', action: { label: 'Support kontaktieren', href: 'https://wa.me/4917625026991', type: 'whatsapp' } } },
+      { id: 'fi3', label: 'Transportschaden', result: { title: 'Beim Versand beschädigt?', description: 'Das entspricht nicht unserem Standard. Bitte kontaktiere uns sofort mit Fotos der Verpackung und des Bauteils.' } }
     ]
   },
 

@@ -200,7 +200,7 @@ const HorizontalScrollGallery = () => {
           </div>
 
           {/* Card 2: FDM */}
-          <TiltCard className="w-[85vw] lg:w-[60vw] min-w-[700px] lg:min-w-[850px] h-[85vh] lg:h-[80vh] shrink-0 bg-[#141414] border border-white/10" glowColor="rgba(196,30,58,0.2)">
+          <TiltCard className="w-[85vw] md:w-[70vw] lg:w-[60vw] min-w-[85vw] md:min-w-[700px] lg:min-w-[850px] h-[85vh] lg:h-[80vh] shrink-0 bg-[#141414] border border-white/10" glowColor="rgba(196,30,58,0.2)">
             <div className="flex justify-between items-start w-full">
               <div className="flex items-center gap-4">
                 <div className="w-12 h-12 lg:w-16 lg:h-16 rounded-2xl bg-[#C41E3A]/10 flex items-center justify-center border border-[#C41E3A]/30">
@@ -214,10 +214,10 @@ const HorizontalScrollGallery = () => {
               <span className="text-7xl lg:text-8xl font-black text-white/5 font-calistoga select-none">01</span>
             </div>
             
-            <div className="flex gap-6 lg:gap-12 mt-6 lg:mt-8 flex-grow min-h-0">
+            <div className="flex flex-col md:flex-row gap-6 lg:gap-12 mt-6 lg:mt-8 flex-grow min-h-0">
               {/* Text Column with Scroll */}
-              <div className="w-[45%] flex flex-col justify-start overflow-y-auto pr-4 pb-4 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
-                <p className="text-white/70 text-base lg:text-lg leading-relaxed mb-6">
+              <div className="w-full md:w-[45%] flex flex-col justify-start overflow-y-auto pr-2 md:pr-4 pb-4 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+                <p className="text-white/70 text-sm md:text-base lg:text-lg leading-relaxed mb-6">
                   Unser FDM-Verfahren bietet die ideale Balance aus Geschwindigkeit, Kosten und mechanischer Belastbarkeit. 
                   Wir verwenden modernste Hochtemperaturdrucker für technische Kunststoffe, die selbst extremen Anforderungen standhalten.
                   Perfekt für Prototypenbau, Vorrichtungen und Endanwendungsteile in Kleinserien.
@@ -238,7 +238,7 @@ const HorizontalScrollGallery = () => {
               </div>
               
               {/* Visual Column with Scroll */}
-              <div className="w-[55%] relative h-full rounded-3xl overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] border border-white/5 bg-gradient-to-br from-white/5 to-transparent p-6 lg:p-8 flex flex-col justify-between group">
+              <div className="hidden md:flex w-full md:w-[55%] relative h-full rounded-3xl overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] border border-white/5 bg-gradient-to-br from-white/5 to-transparent p-6 lg:p-8 flex-col justify-between group">
                 <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-20 mix-blend-overlay pointer-events-none" />
                 <div className="relative z-10 flex justify-between items-center text-white/50 mb-4">
                   <span className="text-xs tracking-widest uppercase">Technologien</span>
@@ -285,7 +285,7 @@ const HorizontalScrollGallery = () => {
           </TiltCard>
 
           {/* Card 3: SLA */}
-          <TiltCard className="w-[85vw] lg:w-[60vw] min-w-[700px] lg:min-w-[850px] h-[85vh] lg:h-[80vh] shrink-0 bg-[#141414] border border-white/10" glowColor="rgba(56,189,248,0.2)">
+          <TiltCard className="w-[85vw] md:w-[70vw] lg:w-[60vw] min-w-[85vw] md:min-w-[700px] lg:min-w-[850px] h-[85vh] lg:h-[80vh] shrink-0 bg-[#141414] border border-white/10" glowColor="rgba(56,189,248,0.2)">
             <div className="flex justify-between items-start w-full">
               <div className="flex items-center gap-4">
                 <div className="w-12 h-12 lg:w-16 lg:h-16 rounded-2xl bg-sky-500/10 flex items-center justify-center border border-sky-500/30">
@@ -299,10 +299,10 @@ const HorizontalScrollGallery = () => {
               <span className="text-7xl lg:text-8xl font-black text-white/5 font-calistoga select-none">02</span>
             </div>
             
-            <div className="flex gap-6 lg:gap-12 mt-6 lg:mt-8 flex-grow min-h-0">
+            <div className="flex flex-col md:flex-row gap-6 lg:gap-12 mt-6 lg:mt-8 flex-grow min-h-0">
               {/* Text Column with Scroll */}
-              <div className="w-[45%] flex flex-col justify-start overflow-y-auto pr-4 pb-4 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
-                <p className="text-white/70 text-base lg:text-lg leading-relaxed mb-6">
+              <div className="w-full md:w-[45%] flex flex-col justify-start overflow-y-auto pr-2 md:pr-4 pb-4 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+                <p className="text-white/70 text-sm md:text-base lg:text-lg leading-relaxed mb-6">
                   Wenn absolute Detailtreue und makellose Oberflächen gefordert sind, ist SLA die Methode der Wahl. 
                   Durch die Aushärtung von flüssigem Harz mit einem hochpräzisen UV-Laser entstehen Bauteile mit einer 
                   Qualität, die dem Spritzguss in nichts nachsteht. Ideal für Schmuck, Dentaltechnik, Miniaturen und Design-Prototypen.
@@ -323,7 +323,7 @@ const HorizontalScrollGallery = () => {
               </div>
               
               {/* Visual Column with Scroll */}
-              <div className="w-[55%] relative h-full rounded-3xl overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] border border-white/5 bg-gradient-to-br from-white/5 to-transparent p-6 lg:p-8 flex flex-col justify-between group">
+              <div className="hidden md:flex w-full md:w-[55%] relative h-full rounded-3xl overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] border border-white/5 bg-gradient-to-br from-white/5 to-transparent p-6 lg:p-8 flex-col justify-between group">
                 <div className="absolute inset-0 bg-gradient-to-t from-sky-900/20 to-transparent opacity-50 pointer-events-none" />
                 <div className="absolute bottom-0 left-0 right-0 h-32 bg-sky-500/10 blur-2xl transform translate-y-16 group-hover:translate-y-0 transition-transform duration-1000 pointer-events-none" />
 
@@ -372,7 +372,7 @@ const HorizontalScrollGallery = () => {
           </TiltCard>
 
           {/* Card 4: 3D-Modellierung */}
-          <TiltCard className="w-[85vw] lg:w-[60vw] min-w-[700px] lg:min-w-[850px] h-[85vh] lg:h-[80vh] shrink-0 bg-[#141414] border border-white/10" glowColor="rgba(168,85,247,0.2)">
+          <TiltCard className="w-[85vw] md:w-[70vw] lg:w-[60vw] min-w-[85vw] md:min-w-[700px] lg:min-w-[850px] h-[85vh] lg:h-[80vh] shrink-0 bg-[#141414] border border-white/10" glowColor="rgba(168,85,247,0.2)">
             <div className="flex justify-between items-start w-full">
               <div className="flex items-center gap-4">
                 <div className="w-12 h-12 lg:w-16 lg:h-16 rounded-2xl bg-purple-500/10 flex items-center justify-center border border-purple-500/30">
@@ -386,10 +386,10 @@ const HorizontalScrollGallery = () => {
               <span className="text-7xl lg:text-8xl font-black text-white/5 font-calistoga select-none">03</span>
             </div>
             
-            <div className="flex gap-6 lg:gap-12 mt-6 lg:mt-8 flex-grow min-h-0">
+            <div className="flex flex-col md:flex-row gap-6 lg:gap-12 mt-6 lg:mt-8 flex-grow min-h-0">
               {/* Text Column with Scroll */}
-              <div className="w-[45%] flex flex-col justify-start overflow-y-auto pr-4 pb-4 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
-                <p className="text-white/70 text-base lg:text-lg leading-relaxed mb-6">
+              <div className="w-full md:w-[45%] flex flex-col justify-start overflow-y-auto pr-2 md:pr-4 pb-4 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+                <p className="text-white/70 text-sm md:text-base lg:text-lg leading-relaxed mb-6">
                   Die perfekte Idee braucht das perfekte digitale Fundament. Unsere Experten verwandeln Ihre Skizzen, 
                   Konzepte oder physischen Objekte in hochpräzise 3D-Modelle. Ob organische Formen für Kunst und Design 
                   oder strikt parametrische Modelle für die Industrie – wir erschaffen digitale Realität, optimiert für den 3D-Druck.
@@ -410,7 +410,7 @@ const HorizontalScrollGallery = () => {
               </div>
               
               {/* Visual Column with Scroll */}
-              <div className="w-[55%] relative h-full rounded-3xl overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] border border-white/5 bg-gradient-to-br from-white/5 to-transparent p-6 lg:p-8 flex flex-col justify-between group">
+              <div className="hidden md:flex w-full md:w-[55%] relative h-full rounded-3xl overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] border border-white/5 bg-gradient-to-br from-white/5 to-transparent p-6 lg:p-8 flex-col justify-between group">
                 <svg className="absolute inset-0 w-full h-full opacity-10 group-hover:opacity-20 transition-opacity duration-1000 pointer-events-none" viewBox="0 0 100 100" preserveAspectRatio="none">
                   <path d="M0,50 Q25,25 50,50 T100,50 M0,20 Q25,80 50,20 T100,80 M0,80 Q25,20 50,80 T100,20" fill="none" stroke="white" strokeWidth="0.5" vectorEffect="non-scaling-stroke"/>
                   <path d="M50,0 L50,100 M20,0 L20,100 M80,0 L80,100" fill="none" stroke="white" strokeWidth="0.5" vectorEffect="non-scaling-stroke"/>
@@ -459,7 +459,7 @@ const HorizontalScrollGallery = () => {
           </TiltCard>
 
           {/* Card 5: Konstruktion */}
-          <TiltCard className="w-[85vw] lg:w-[60vw] min-w-[700px] lg:min-w-[850px] h-[85vh] lg:h-[80vh] shrink-0 bg-[#141414] border border-white/10" glowColor="rgba(16,185,129,0.2)">
+          <TiltCard className="w-[85vw] md:w-[70vw] lg:w-[60vw] min-w-[85vw] md:min-w-[700px] lg:min-w-[850px] h-[85vh] lg:h-[80vh] shrink-0 bg-[#141414] border border-white/10" glowColor="rgba(16,185,129,0.2)">
             <div className="flex justify-between items-start w-full">
               <div className="flex items-center gap-4">
                 <div className="w-12 h-12 lg:w-16 lg:h-16 rounded-2xl bg-emerald-500/10 flex items-center justify-center border border-emerald-500/30">
@@ -473,10 +473,10 @@ const HorizontalScrollGallery = () => {
               <span className="text-7xl lg:text-8xl font-black text-white/5 font-calistoga select-none">04</span>
             </div>
             
-            <div className="flex gap-6 lg:gap-12 mt-6 lg:mt-8 flex-grow min-h-0">
+            <div className="flex flex-col md:flex-row gap-6 lg:gap-12 mt-6 lg:mt-8 flex-grow min-h-0">
               {/* Text Column with Scroll */}
-              <div className="w-[45%] flex flex-col justify-start overflow-y-auto pr-4 pb-4 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
-                <p className="text-white/70 text-base lg:text-lg leading-relaxed mb-6">
+              <div className="w-full md:w-[45%] flex flex-col justify-start overflow-y-auto pr-2 md:pr-4 pb-4 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+                <p className="text-white/70 text-sm md:text-base lg:text-lg leading-relaxed mb-6">
                   Mehr als nur Form: Funktion. Wir konstruieren Baugruppen, mechanische Systeme und Gehäuse, 
                   die nicht nur gut aussehen, sondern in der realen Welt funktionieren. Unter Berücksichtigung 
                   von Materialeigenschaften, Toleranzen und Fertigungsrestriktionen entwickeln wir Lösungen, 
@@ -498,7 +498,7 @@ const HorizontalScrollGallery = () => {
               </div>
               
               {/* Visual Column with Scroll */}
-              <div className="w-[55%] relative h-full rounded-3xl overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] border border-white/5 bg-gradient-to-br from-white/5 to-transparent p-6 lg:p-8 flex flex-col justify-between group">
+              <div className="hidden md:flex w-full md:w-[55%] relative h-full rounded-3xl overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] border border-white/5 bg-gradient-to-br from-white/5 to-transparent p-6 lg:p-8 flex-col justify-between group">
                 <div className="absolute inset-0 opacity-10 pointer-events-none" 
                      style={{ backgroundImage: 'linear-gradient(rgba(255,255,255,0.2) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.2) 1px, transparent 1px)', backgroundSize: '20px 20px' }}>
                 </div>

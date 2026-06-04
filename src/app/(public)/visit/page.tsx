@@ -5,7 +5,7 @@ import { VisitSEO } from "@/content/seo/VisitSEO";
 import { SEOContentBlock } from "@/components/seo/SEOContentBlock";
 import { FadeUp } from "@/components/ui/FadeUp";
 import { PrimaryButton, SecondaryButton } from "@/components/ui/Btn";
-import { MapPin, Phone, MessageCircle, Truck, Camera, Navigation, Star, Clock, Info, CheckCircle2, Navigation2, Compass, Map, Coffee } from "lucide-react";
+import { MapPin, Phone, MessageCircle, Truck, Camera, Navigation, Star, Clock, Info, CheckCircle2, Navigation2, Compass, Map, Coffee, Box } from "lucide-react";
 import { ClientHoursTable } from "@/components/ui/ClientHoursTable";
 import { InteractiveMapClient } from '@/components/ui/InteractiveMapClient';
 import { motion, useScroll, useTransform, useSpring, useInView, AnimatePresence } from "framer-motion";
@@ -115,7 +115,7 @@ export default function VisitPage() {
             <h1 className="font-calistoga text-[clamp(3.5rem,8vw,7rem)] text-[#1A1A1A] leading-[0.95] tracking-tight mb-6 drop-shadow-sm">
               Entdecke den <br />
               <span className="text-[#C41E3A] relative inline-block">
-                Geschmack
+                Präzision
                 <motion.svg 
                   className="absolute -bottom-2 left-0 w-full h-4 text-[#C41E3A] opacity-50"
                   viewBox="0 0 100 20" preserveAspectRatio="none"
@@ -131,7 +131,7 @@ export default function VisitPage() {
               </span>
             </h1>
             <p className="font-nunito text-[clamp(1.1rem,2vw,1.4rem)] text-[#4A4A4A] max-w-2xl mx-auto leading-relaxed">
-              Tauche ein in eine Welt voller Aromen. Besuche unser Studio vor Ort oder lass dir unser Erlebnis direkt nach Hause liefern.
+              Tauche ein in die Welt der additiven Fertigung. Besuche unser High-Tech-Labor vor Ort oder vereinbare einen digitalen Beratungstermin.
             </p>
           </motion.div>
 
@@ -165,8 +165,8 @@ export default function VisitPage() {
             
             <div className="lg:col-span-7 relative h-[60vh] min-h-[500px]">
               <ParallaxImage 
-                src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?q=80&w=2000&auto=format&fit=crop"
-                alt="Restaurant Interior"
+                src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=2000&auto=format&fit=crop"
+                alt="3D Printing Lab Interior"
                 yOffset={150}
                 scaleOnScroll
                 className="w-full h-full shadow-2xl"
@@ -176,7 +176,7 @@ export default function VisitPage() {
                 className="top-10 -left-10 lg:-left-20" delay={0.2} color="#F59E0B"
               />
               <FloatingStatPill 
-                icon={Coffee} value="100%" label="Handgemacht" 
+                icon={Box} value="100%" label="Custom" 
                 className="bottom-20 -right-10 lg:-right-16" delay={0.4} color="#3B82F6"
               />
             </div>
@@ -184,10 +184,10 @@ export default function VisitPage() {
             <div className="lg:col-span-5">
               <FadeUp className="mb-8">
                 <h2 className="font-calistoga text-5xl lg:text-7xl text-[#1A1A1A] mb-6 leading-tight">
-                  Architektur <br/><span className="text-[#8A8A8A]">& Atmosphäre</span>
+                  High-Tech <br/><span className="text-[#8A8A8A]">& Präzision</span>
                 </h2>
                 <p className="font-nunito text-xl text-[#4A4A4A] leading-loose mb-10">
-                  Unser Studio in Wetzlar vereint modernes Design mit gemütlicher Gastfreundschaft. Ein Ort, der dazu einlädt, den Moment zu genießen, sich auszutauschen und kulinarische Highlights zu erleben.
+                  Unser Labor in Wetzlar vereint modernste 3D-Drucktechnologie mit echter Ingenieurskunst. Ein Ort, der dazu einlädt, Ideen zu besprechen, Prototypen zu testen und Innovationen greifbar zu machen.
                 </p>
                 <div className="grid grid-cols-2 gap-6">
                   {[
@@ -208,7 +208,7 @@ export default function VisitPage() {
           </div>
         </div>
 
-        <ScrollingTypography text="Erlebe Den Moment" direction={-1} speed={1.2} />
+        <ScrollingTypography text="Erlebe Innovation" direction={-1} speed={1.2} />
 
         {/* Second Parallax Block */}
         <div className="max-w-[1400px] mx-auto px-6 pb-24 lg:pb-32 mt-24 lg:mt-32">
@@ -216,8 +216,8 @@ export default function VisitPage() {
             
             <div className="lg:col-span-7 lg:order-2 relative h-[60vh] min-h-[500px]">
               <ParallaxImage 
-                src="https://images.unsplash.com/photo-1559339352-11d035aa65de?q=80&w=2000&auto=format&fit=crop"
-                alt="Details and Food"
+                src="https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?q=80&w=2000&auto=format&fit=crop"
+                alt="Details of 3D Printing"
                 yOffset={-100}
                 className="w-full h-full shadow-2xl"
               />
@@ -233,10 +233,10 @@ export default function VisitPage() {
                   Liebe zum <br/><span className="text-[#C41E3A]">Detail</span>
                 </h2>
                 <p className="font-nunito text-xl text-[#4A4A4A] leading-loose mb-10">
-                  Von der sorgfältigen Auswahl unserer Zutaten bis hin zur Präsentation auf dem Teller – wir überlassen nichts dem Zufall.
+                  Von der sorgfältigen Konstruktion im CAD bis hin zum finalen Druck und der Nachbearbeitung – wir überlassen nichts dem Zufall.
                 </p>
                 <ul className="space-y-6">
-                  {['Täglich frisch zubereitet', 'Regionale Lieferanten', 'Einzigartige Rezepturen', 'Passion für Geschmack'].map((text, i) => (
+                  {['Spezialisiert auf komplexe Geometrien', 'Einsatz von Hochleistungspolymeren', 'Mikrometer-genaue Toleranzen', 'Passion für perfektes Finish'].map((text, i) => (
                     <li key={i} className="flex items-center gap-4">
                       <div className="w-8 h-8 rounded-full bg-[#C41E3A]/10 flex items-center justify-center shrink-0">
                         <CheckCircle2 size={16} className="text-[#C41E3A]" />
@@ -303,7 +303,7 @@ export default function VisitPage() {
                   { Icon: Phone, label: 'Telefon', val: '06441 7890426', href: 'tel:+4964417890426', color: '#3B82F6' },
                   { Icon: MessageCircle, label: 'WhatsApp', val: '0176 25026991', href: 'https://wa.me/4917625026991', color: '#10B981' },
                   { Icon: Camera, label: 'Instagram', val: '@aykin3d', href: 'https://www.instagram.com/aykin3d', color: '#E1306C' },
-                  { Icon: Truck, label: 'Lieferung', val: 'Lieferando', href: 'https://www.lieferando.de/speisekarte/aykin', color: '#FF8000' },
+                  { Icon: Box, label: 'Produktion', val: 'Express', href: '/anfrage', color: '#FF8000' },
                 ].map(({ Icon, label, val, href, color }) => (
                   <a key={label} href={href} target="_blank" rel="noreferrer" className="group block bg-[#FAF8F5] rounded-[24px] p-6 border border-[#F2E8E0] transition-all duration-300 hover:shadow-lg hover:-translate-y-1 hover:border-transparent" style={{ '--hover-color': color } as any}>
                     <div className="w-12 h-12 rounded-2xl flex items-center justify-center mb-4 transition-colors duration-300 group-hover:text-white" style={{ backgroundColor: `${color}15`, color: color }}>
@@ -335,13 +335,13 @@ export default function VisitPage() {
         
         <div className="max-w-4xl mx-auto px-6 relative z-10 text-center">
           <FadeUp>
-            <h2 className="font-calistoga text-5xl md:text-7xl text-white mb-8">Hungrig geworden?</h2>
+            <h2 className="font-calistoga text-5xl md:text-7xl text-white mb-8">Projekt am Start?</h2>
             <p className="font-nunito text-xl text-gray-400 leading-loose mb-12 max-w-2xl mx-auto">
-              Bestelle jetzt bequem online oder besuche uns im Studio. Wir freuen uns auf dich!
+              Starte jetzt deine Anfrage online oder besuche uns im Studio. Wir freuen uns auf deine Herausforderung!
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
-              <a href="https://www.lieferando.de/speisekarte/aykin" target="_blank" rel="noreferrer" className="bg-[#FF8000] text-white px-10 py-5 rounded-[20px] font-nunito font-bold text-xl flex items-center gap-3 hover:bg-[#e67300] transition-colors shadow-[0_10px_30px_rgba(255,128,0,0.3)] hover:-translate-y-1 transform duration-300">
-                <Truck size={24} /> Auf Lieferando bestellen
+              <a href="/anfrage" className="bg-[#FF8000] text-white px-10 py-5 rounded-[20px] font-nunito font-bold text-xl flex items-center gap-3 hover:bg-[#e67300] transition-colors shadow-[0_10px_30px_rgba(255,128,0,0.3)] hover:-translate-y-1 transform duration-300">
+                <Box size={24} /> Anfrage starten
               </a>
               <a href="https://maps.google.com/?q=Aykin+Studio" target="_blank" rel="noreferrer" className="bg-white/10 text-white px-10 py-5 rounded-[20px] font-nunito font-bold text-xl flex items-center gap-3 hover:bg-white/20 transition-colors backdrop-blur-md">
                 <Map size={24} /> Route planen
@@ -350,7 +350,7 @@ export default function VisitPage() {
             
             <div className="mt-12 flex items-center justify-center gap-3 text-white/60">
               <CheckCircle2 size={18} className="text-[#10B981]" />
-              <span className="font-nunito text-sm">Keine Liefergebühr bei Lieferando.</span>
+              <span className="font-nunito text-sm">Individuelle Beratung inklusive.</span>
             </div>
           </FadeUp>
         </div>

@@ -284,7 +284,7 @@ function MaterialSection({ material, index }: { material: MaterialData, index: n
                 </span>
                 <div className="h-[2px] w-16" style={{ backgroundColor: material.themeColor }} />
               </div>
-              <h2 className="font-calistoga text-6xl md:text-8xl text-gray-900 mb-4 tracking-tight">
+              <h2 className="font-calistoga text-5xl md:text-6xl lg:text-8xl text-gray-900 mb-4 tracking-tight break-words hyphens-auto">
                 {material.name.split(' ')[0]} <span className="text-gray-400">{material.name.split(' ').slice(1).join(' ')}</span>
               </h2>
               <p className="text-2xl text-gray-600 font-medium mb-6">{material.tagline}</p>

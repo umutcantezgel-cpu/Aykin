@@ -59,35 +59,35 @@ export default function ProduktePage() {
 
           <motion.div 
             style={{ z: z1, opacity: opacity1, scale: scale1, rotateX: rotateX1 }}
-            className="absolute w-[90%] max-w-4xl aspect-video bg-gradient-to-br from-[#2a2a2a] to-[#1A1A1A] border border-white/10 rounded-[3rem] p-8 md:p-16 shadow-[0_30px_100px_rgba(0,0,0,0.8)] flex flex-col items-center justify-center gap-8"
+            className="absolute w-[90%] max-w-4xl aspect-[4/5] sm:aspect-square md:aspect-video bg-gradient-to-br from-[#2a2a2a] to-[#1A1A1A] border border-white/10 rounded-[2rem] md:rounded-[3rem] p-6 md:p-16 shadow-[0_30px_100px_rgba(0,0,0,0.8)] flex flex-col items-center justify-center gap-4 md:gap-8 overflow-hidden"
           >
-            <div className="w-28 h-28 rounded-full bg-[#C41E3A]/20 flex items-center justify-center border border-[#C41E3A]/50">
-              <Box size={56} className="text-[#C41E3A]" />
+            <div className="w-20 h-20 md:w-28 md:h-28 rounded-full bg-[#C41E3A]/20 flex items-center justify-center border border-[#C41E3A]/50 shrink-0">
+              <Box className="w-8 h-8 md:w-14 md:h-14 text-[#C41E3A]" />
             </div>
-            <h3 className="font-calistoga text-5xl md:text-7xl text-white text-center">Industrie Bauteile</h3>
-            <p className="text-[#A1A1AA] text-center text-xl md:text-2xl max-w-2xl leading-relaxed md:leading-loose">Extreme Belastbarkeit durch Carbon-Faserverstärkung. Entwickelt für den echten Einsatz unter extremen Bedingungen.</p>
+            <h3 className="font-calistoga text-3xl sm:text-4xl md:text-7xl text-white text-center hyphens-auto break-words">Industrie Bauteile</h3>
+            <p className="text-[#A1A1AA] text-center text-sm sm:text-base md:text-2xl max-w-2xl leading-relaxed md:leading-loose">Extreme Belastbarkeit durch Carbon-Faserverstärkung. Entwickelt für den echten Einsatz unter extremen Bedingungen.</p>
           </motion.div>
 
           <motion.div 
             style={{ z: z2, opacity: opacity2, scale: scale2, rotateX: rotateX2 }}
-            className="absolute w-[90%] max-w-4xl aspect-video bg-gradient-to-br from-[#FAF8F5] to-white border border-[#E8D5C4] rounded-[3rem] p-8 md:p-16 shadow-[0_30px_100px_rgba(0,0,0,0.3)] flex flex-col items-center justify-center gap-8"
+            className="absolute w-[90%] max-w-4xl aspect-[4/5] sm:aspect-square md:aspect-video bg-gradient-to-br from-[#FAF8F5] to-white border border-[#E8D5C4] rounded-[2rem] md:rounded-[3rem] p-6 md:p-16 shadow-[0_30px_100px_rgba(0,0,0,0.3)] flex flex-col items-center justify-center gap-4 md:gap-8 overflow-hidden"
           >
-            <div className="w-28 h-28 rounded-full bg-[#1A1A1A]/5 flex items-center justify-center border border-[#1A1A1A]/10">
-              <Layers size={56} className="text-[#1A1A1A]" />
+            <div className="w-20 h-20 md:w-28 md:h-28 rounded-full bg-[#1A1A1A]/5 flex items-center justify-center border border-[#1A1A1A]/10 shrink-0">
+              <Layers className="w-8 h-8 md:w-14 md:h-14 text-[#1A1A1A]" />
             </div>
-            <h3 className="font-calistoga text-5xl md:text-7xl text-[#1A1A1A] text-center">Architekturmodelle</h3>
-            <p className="text-[#2D2D2D] text-center text-xl md:text-2xl max-w-2xl leading-relaxed md:leading-loose">SLA-Präzision bis in den Mikrometer-Bereich. Wir drucken Details, die mit dem bloßen Auge kaum sichtbar sind.</p>
+            <h3 className="font-calistoga text-3xl sm:text-4xl md:text-7xl text-[#1A1A1A] text-center hyphens-auto break-words">Architekturmodelle</h3>
+            <p className="text-[#2D2D2D] text-center text-sm sm:text-base md:text-2xl max-w-2xl leading-relaxed md:leading-loose">SLA-Präzision bis in den Mikrometer-Bereich. Wir drucken Details, die mit dem bloßen Auge kaum sichtbar sind.</p>
           </motion.div>
 
           <motion.div 
             style={{ z: z3, opacity: opacity3, scale: scale3, rotateX: rotateX3 }}
-            className="absolute w-[90%] max-w-4xl aspect-video bg-gradient-to-br from-[#C41E3A] to-[#9a152d] border border-white/20 rounded-[3rem] p-8 md:p-16 shadow-[0_30px_100px_rgba(196,30,58,0.5)] flex flex-col items-center justify-center gap-8 text-white"
+            className="absolute w-[90%] max-w-4xl aspect-[4/5] sm:aspect-square md:aspect-video bg-gradient-to-br from-[#C41E3A] to-[#9a152d] border border-white/20 rounded-[2rem] md:rounded-[3rem] p-6 md:p-16 shadow-[0_30px_100px_rgba(196,30,58,0.5)] flex flex-col items-center justify-center gap-4 md:gap-8 text-white overflow-hidden"
           >
-            <div className="w-28 h-28 rounded-full bg-white/10 flex items-center justify-center border border-white/20 backdrop-blur-sm">
-              <Play size={56} className="text-white fill-white" />
+            <div className="w-20 h-20 md:w-28 md:h-28 rounded-full bg-white/10 flex items-center justify-center border border-white/20 backdrop-blur-sm shrink-0">
+              <Play className="w-8 h-8 md:w-14 md:h-14 text-white fill-white" />
             </div>
-            <h3 className="font-calistoga text-5xl md:text-7xl text-white text-center">Gehäuse & Prototypen</h3>
-            <p className="text-white/80 text-center text-xl md:text-2xl max-w-2xl leading-relaxed md:leading-loose">Von der ersten Skizze zum funktionierenden Produkt in Rekordzeit. Iteriere wöchentlich, nicht jährlich.</p>
+            <h3 className="font-calistoga text-3xl sm:text-4xl md:text-7xl text-white text-center hyphens-auto break-words">Gehäuse & Prototypen</h3>
+            <p className="text-white/80 text-center text-sm sm:text-base md:text-2xl max-w-2xl leading-relaxed md:leading-loose">Von der ersten Skizze zum funktionierenden Produkt in Rekordzeit. Iteriere wöchentlich, nicht jährlich.</p>
           </motion.div>
 
         </div>
@@ -131,8 +131,8 @@ export default function ProduktePage() {
       <section className="py-24 md:py-32 px-6 bg-[#C41E3A] text-white overflow-hidden relative w-full max-w-full">
         <div className="absolute inset-0 bg-grid-white/[0.1] bg-[length:30px_30px] opacity-50" />
         <div className="max-w-5xl mx-auto text-center relative z-10 flex flex-col items-center">
-          <h2 className="font-calistoga text-5xl md:text-7xl lg:text-8xl mb-8">Bereit für den Druck?</h2>
-          <p className="text-xl md:text-2xl lg:text-3xl font-light mb-12 opacity-90 max-w-3xl leading-relaxed md:leading-loose">
+          <h2 className="font-calistoga text-4xl sm:text-5xl md:text-7xl lg:text-8xl mb-6 md:mb-8 break-words hyphens-auto">Bereit für den Druck?</h2>
+          <p className="text-base sm:text-xl md:text-2xl lg:text-3xl font-light mb-10 md:mb-12 opacity-90 max-w-3xl leading-relaxed md:leading-loose">
             Egal ob einzelne Sonderanfertigung oder Serienproduktion. Wir machen deine Idee physisch greifbar.
           </p>
           <div className="flex flex-col sm:flex-row gap-6">
@@ -169,8 +169,8 @@ function DeepDiveSection({ title, subtitle, description, features, icon, bgColor
           </div>
           <div>
             <p className={`${textColor === 'text-white' ? 'text-white' : 'text-[#C41E3A]'} font-bold tracking-[0.2em] uppercase mb-4 text-sm md:text-base`}>{subtitle}</p>
-            <h2 className={`font-calistoga text-6xl md:text-8xl mb-8 ${textColor} leading-[1.1]`}>{title}</h2>
-            <p className={`text-xl md:text-2xl leading-relaxed md:leading-loose ${textColor === 'text-white' ? 'text-gray-400' : 'text-gray-600'} font-light`}>
+            <h2 className={`font-calistoga text-4xl sm:text-5xl md:text-7xl lg:text-8xl mb-8 ${textColor} leading-[1.1] break-words hyphens-auto`}>{title}</h2>
+            <p className={`text-base sm:text-lg md:text-2xl leading-relaxed md:leading-loose ${textColor === 'text-white' ? 'text-gray-400' : 'text-gray-600'} font-light`}>
               {description}
             </p>
           </div>

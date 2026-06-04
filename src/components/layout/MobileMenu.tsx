@@ -45,22 +45,29 @@ export function MobileMenu({ isOpen, onClose, pathname }: MobileMenuProps) {
             className="-top-20 -right-20 pointer-events-none" 
           />
 
-          <div className="relative z-10 flex flex-col gap-2 mt-4 items-center text-center">
-            {links.map(({ id, href, label }) => {
+          <div className="relative z-10 flex flex-col gap-3 mt-8 w-full max-w-md mx-auto mb-10">
+            {links.map(({ id, href, label }, index) => {
               const active = pathname === href;
               return (
-                <TransitionLink 
-                  key={id} 
-                  href={href} 
-                  onClick={onClose}
-                  className={`
-                    w-full py-3 
-                    font-calistoga text-4xl sm:text-5xl transition-all duration-300
-                    ${active ? 'text-[#C41E3A] scale-105' : 'text-[#1A1A1A] hover:text-[#C41E3A] hover:scale-105 opacity-80 hover:opacity-100'}
-                  `}
+                <motion.div
+                  key={id}
+                  initial={prefersReducedMotion ? { opacity: 0 } : { opacity: 0, x: -20 }}
+                  animate={prefersReducedMotion ? { opacity: 1 } : { opacity: 1, x: 0 }}
+                  transition={{ delay: prefersReducedMotion ? 0 : index * 0.05 + 0.1, duration: 0.4 }}
                 >
-                  {label}
-                </TransitionLink>
+                  <TransitionLink 
+                    href={href} 
+                    onClick={onClose}
+                    className={`
+                      flex items-center justify-between w-full py-4 px-6 rounded-[24px]
+                      font-calistoga text-2xl sm:text-3xl transition-all duration-300
+                      ${active ? 'bg-[#C41E3A] text-white shadow-lg shadow-[#C41E3A]/20' : 'bg-white/60 text-[#1A1A1A] hover:bg-white hover:shadow-md hover:text-[#C41E3A] border border-[#E8D5C4]/60 backdrop-blur-sm'}
+                    `}
+                  >
+                    <span>{label}</span>
+                    {active ? <ChevronRight size={24} className="opacity-100" /> : <ChevronRight size={24} className="opacity-30" />}
+                  </TransitionLink>
+                </motion.div>
               );
             })}
           </div>

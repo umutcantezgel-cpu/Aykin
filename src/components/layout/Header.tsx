@@ -71,8 +71,8 @@ export function Header() {
             border: '1px solid rgba(196,30,58, 0.1)',
             boxShadow: '0 10px 40px -10px rgba(196,30,58, 0.15)',
             marginTop: '24px',
-            width: '90%',
-            maxWidth: '1000px',
+            width: '95%',
+            maxWidth: '1400px',
             borderRadius: '100px',
           } : {
             marginTop: headerTop,
@@ -88,7 +88,7 @@ export function Header() {
         >
           <motion.div 
             style={{ height: headerHeightDesktop }}
-            className="w-full px-4 md:px-8 flex items-center justify-between gap-2 md:gap-4 hidden md:flex"
+            className="w-full px-4 md:px-8 flex items-center justify-between gap-2 xl:gap-6 hidden xl:flex"
           >
             {/* Left: Logo */}
             <div className="flex-shrink-0">
@@ -98,7 +98,7 @@ export function Header() {
             </div>
 
             {/* Middle: Navigation with Magnetic Hover Effects */}
-            <nav className="hidden md:flex items-center gap-1">
+            <nav className="hidden xl:flex items-center gap-1">
               {links.map(({ id, href, label }) => {
                 const active = pathname === href;
                 return (
@@ -124,9 +124,9 @@ export function Header() {
             </nav>
 
             {/* Right: Actions */}
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-4">
               {/* PrimaryCTA Desktop */}
-              <div className="hidden lg:block">
+              <div className="hidden xl:block">
                 <TransitionLink href="/anfrage" tabIndex={-1}>
                   <PrimaryCTA className="py-2.5 px-6 text-sm" showArrow>
                     Anfrage starten
@@ -160,7 +160,7 @@ export function Header() {
           {/* Mobile Layout */}
           <motion.div 
             style={{ height: headerHeightMobile }}
-            className="w-full px-4 flex items-center justify-between gap-2 md:hidden"
+            className="w-full px-4 flex items-center justify-between gap-2 xl:hidden"
           >
             <TransitionLink href="/" aria-label="Aykin Startseite" className="block">
               <Logo variant="primary" className="w-[50px]" />

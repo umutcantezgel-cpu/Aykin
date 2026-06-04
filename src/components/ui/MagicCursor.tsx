@@ -13,9 +13,26 @@ export function MagicCursor() {
 
   const [isHovering, setIsHovering] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    // Hide the default cursor globally
+    setMounted(true);
+    
+    // Check mobile initially
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 1024);
+    };
+    checkMobile();
+    
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
+  useEffect(() => {
+    if (isMobile || !mounted) return;
+
+    // Hide the default cursor globally only on desktop
     const style = document.createElement("style");
     style.innerHTML = `
       * {
@@ -59,12 +76,9 @@ export function MagicCursor() {
         document.head.removeChild(style);
       }
     };
-  }, [cursorX, cursorY, isVisible]);
+  }, [cursorX, cursorY, isVisible, isMobile, mounted]);
 
-  // To avoid SSR mismatch since we use browser-only events/state
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => setMounted(true), []);
-  if (!mounted) return null;
+  if (!mounted || isMobile) return null;
 
   return (
     <>
