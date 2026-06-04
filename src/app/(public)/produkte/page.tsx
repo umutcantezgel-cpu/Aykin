@@ -34,7 +34,7 @@ export default function ProduktePage() {
   const rotateX3 = useTransform(smoothProgress, [0.2, 0.5], [-40, 20]);
 
   return (
-    <main className="bg-white min-h-screen selection:bg-[#C41E3A] selection:text-white">
+    <main className="bg-white min-h-screen overflow-x-clip w-full max-w-full selection:bg-[#C41E3A] selection:text-white">
       <SubpageHero 
         label="PORTFOLIO"
         title="Unsere Produkte & Prototypen."
@@ -42,7 +42,7 @@ export default function ProduktePage() {
       />
 
       {/* 3D PARALLAX GALLERY - SCROLLYTELLING CONTAINER */}
-      <section ref={containerRef} className="relative h-[300vh] bg-[#1A1A1A]">
+      <section ref={containerRef} className="relative h-[300vh] bg-[#1A1A1A] w-full max-w-full overflow-clip">
         <div className="sticky top-0 h-screen w-full overflow-hidden flex flex-col items-center justify-center perspective-[1200px]">
           
           <motion.div className="absolute inset-0 z-0 bg-grid-white/[0.03] bg-[length:60px_60px]" />
@@ -65,7 +65,7 @@ export default function ProduktePage() {
               <Box size={56} className="text-[#C41E3A]" />
             </div>
             <h3 className="font-calistoga text-5xl md:text-7xl text-white text-center">Industrie Bauteile</h3>
-            <p className="text-[#A1A1AA] text-center text-xl md:text-2xl max-w-2xl">Extreme Belastbarkeit durch Carbon-Faserverstärkung. Entwickelt für den echten Einsatz unter extremen Bedingungen.</p>
+            <p className="text-[#A1A1AA] text-center text-xl md:text-2xl max-w-2xl leading-relaxed md:leading-loose">Extreme Belastbarkeit durch Carbon-Faserverstärkung. Entwickelt für den echten Einsatz unter extremen Bedingungen.</p>
           </motion.div>
 
           <motion.div 
@@ -76,7 +76,7 @@ export default function ProduktePage() {
               <Layers size={56} className="text-[#1A1A1A]" />
             </div>
             <h3 className="font-calistoga text-5xl md:text-7xl text-[#1A1A1A] text-center">Architekturmodelle</h3>
-            <p className="text-[#2D2D2D] text-center text-xl md:text-2xl max-w-2xl">SLA-Präzision bis in den Mikrometer-Bereich. Wir drucken Details, die mit dem bloßen Auge kaum sichtbar sind.</p>
+            <p className="text-[#2D2D2D] text-center text-xl md:text-2xl max-w-2xl leading-relaxed md:leading-loose">SLA-Präzision bis in den Mikrometer-Bereich. Wir drucken Details, die mit dem bloßen Auge kaum sichtbar sind.</p>
           </motion.div>
 
           <motion.div 
@@ -87,7 +87,7 @@ export default function ProduktePage() {
               <Play size={56} className="text-white fill-white" />
             </div>
             <h3 className="font-calistoga text-5xl md:text-7xl text-white text-center">Gehäuse & Prototypen</h3>
-            <p className="text-white/80 text-center text-xl md:text-2xl max-w-2xl">Von der ersten Skizze zum funktionierenden Produkt in Rekordzeit. Iteriere wöchentlich, nicht jährlich.</p>
+            <p className="text-white/80 text-center text-xl md:text-2xl max-w-2xl leading-relaxed md:leading-loose">Von der ersten Skizze zum funktionierenden Produkt in Rekordzeit. Iteriere wöchentlich, nicht jährlich.</p>
           </motion.div>
 
         </div>
@@ -128,11 +128,11 @@ export default function ProduktePage() {
       />
 
       {/* CALL TO ACTION */}
-      <section className="py-32 px-6 bg-[#C41E3A] text-white overflow-hidden relative">
+      <section className="py-24 md:py-32 px-6 bg-[#C41E3A] text-white overflow-hidden relative w-full max-w-full">
         <div className="absolute inset-0 bg-grid-white/[0.1] bg-[length:30px_30px] opacity-50" />
         <div className="max-w-5xl mx-auto text-center relative z-10 flex flex-col items-center">
-          <h2 className="font-calistoga text-5xl md:text-8xl mb-8">Bereit für den Druck?</h2>
-          <p className="text-xl md:text-3xl font-light mb-12 opacity-90 max-w-3xl leading-relaxed">
+          <h2 className="font-calistoga text-5xl md:text-7xl lg:text-8xl mb-8">Bereit für den Druck?</h2>
+          <p className="text-xl md:text-2xl lg:text-3xl font-light mb-12 opacity-90 max-w-3xl leading-relaxed md:leading-loose">
             Egal ob einzelne Sonderanfertigung oder Serienproduktion. Wir machen deine Idee physisch greifbar.
           </p>
           <div className="flex flex-col sm:flex-row gap-6">
@@ -155,14 +155,14 @@ export default function ProduktePage() {
 
 function DeepDiveSection({ title, subtitle, description, features, icon, bgColor, textColor, reverse = false }: any) {
   return (
-    <section className={`py-32 md:py-48 px-6 ${bgColor} overflow-hidden`}>
-      <div className={`max-w-7xl mx-auto flex flex-col ${reverse ? 'lg:flex-row-reverse' : 'lg:flex-row'} items-center gap-16 md:gap-32`}>
+    <section className={`py-24 md:py-32 px-6 ${bgColor} w-full max-w-full overflow-hidden`}>
+      <div className={`max-w-7xl mx-auto flex flex-col ${reverse ? 'lg:flex-row-reverse' : 'lg:flex-row'} items-center gap-16 md:gap-24`}>
         <motion.div 
           initial={{ opacity: 0, x: reverse ? 100 : -100 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true, margin: "-150px" }}
           transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-          className="flex-1 space-y-8"
+          className="w-full lg:w-3/5 space-y-8"
         >
           <div className={`w-24 h-24 rounded-3xl ${textColor === 'text-white' ? 'bg-white/10 border-white/20' : 'bg-[#C41E3A]/10 border-[#C41E3A]/20'} flex items-center justify-center border shadow-xl`}>
             {icon}
@@ -170,7 +170,7 @@ function DeepDiveSection({ title, subtitle, description, features, icon, bgColor
           <div>
             <p className={`${textColor === 'text-white' ? 'text-white' : 'text-[#C41E3A]'} font-bold tracking-[0.2em] uppercase mb-4 text-sm md:text-base`}>{subtitle}</p>
             <h2 className={`font-calistoga text-6xl md:text-8xl mb-8 ${textColor} leading-[1.1]`}>{title}</h2>
-            <p className={`text-2xl md:text-3xl leading-relaxed ${textColor === 'text-white' ? 'text-gray-400' : 'text-gray-600'} font-light`}>
+            <p className={`text-xl md:text-2xl leading-relaxed md:leading-loose ${textColor === 'text-white' ? 'text-gray-400' : 'text-gray-600'} font-light`}>
               {description}
             </p>
           </div>
@@ -179,7 +179,7 @@ function DeepDiveSection({ title, subtitle, description, features, icon, bgColor
             {features.map((feature: string, idx: number) => (
               <div key={idx} className={`flex items-center gap-4 ${textColor === 'text-white' ? 'text-gray-300' : 'text-[#1A1A1A]'} text-lg`}>
                 <ShieldCheck size={28} className={textColor === 'text-white' ? 'text-white' : 'text-[#C41E3A]'} />
-                <span className="font-medium">{feature}</span>
+                <span className="font-medium leading-relaxed">{feature}</span>
               </div>
             ))}
           </div>
@@ -190,7 +190,7 @@ function DeepDiveSection({ title, subtitle, description, features, icon, bgColor
           whileInView={{ opacity: 1, scale: 1, rotateY: 0 }}
           viewport={{ once: true, margin: "-150px" }}
           transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-          className="flex-1 w-full aspect-square relative perspective-[1000px]"
+          className="w-full lg:w-2/5 aspect-square relative perspective-[1000px]"
         >
           <div className={`w-full h-full rounded-[4rem] ${textColor === 'text-white' ? 'bg-gradient-to-tr from-[#2a2a2a] to-[#1a1a1a] border-[#333]' : 'bg-gradient-to-tr from-[#F5F5F5] to-white border-[#E8D5C4]'} border shadow-2xl flex items-center justify-center overflow-hidden relative transform-gpu group`}>
             {/* Abstract Decorative Elements inside the image box */}

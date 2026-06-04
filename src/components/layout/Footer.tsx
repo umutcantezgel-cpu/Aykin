@@ -65,7 +65,7 @@ export function Footer() {
             <nav className="flex flex-col gap-4">
               {[
                 { href: '/', label: 'Startseite' },
-                { href: '/menu', label: 'Produkte' },
+                { href: '/produkte', label: 'Produkte' },
                 { href: '/materialien', label: 'Materialien' },
                 { href: '/showcase', label: 'Showcase' },
                 { href: '/faq', label: 'FAQ' },

@@ -197,14 +197,22 @@ const ContactFormBlock = () => {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       onSubmit={handleSubmit} 
-      className="bg-white p-8 md:p-10 rounded-[40px] shadow-2xl border border-[#F2E8E0] flex flex-col gap-6 relative overflow-hidden"
+      className="bg-white p-8 md:p-12 lg:p-16 rounded-[40px] shadow-2xl border border-[#F2E8E0] flex flex-col lg:flex-row gap-12 relative overflow-hidden max-w-full w-full"
     >
       <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-[#C41E3A]/10 to-transparent rounded-bl-full pointer-events-none" />
       
-      <h2 className="font-calistoga text-3xl text-[#1A1A1A] mb-2">Immer noch Fragen?</h2>
-      <p className="font-nunito text-[#8A8A8A] mb-4">Schreib uns dein Anliegen, und unser Team kümmert sich persönlich darum.</p>
+      {/* 1/3 Golden Ratio Column */}
+      <div className="lg:w-1/3 flex flex-col justify-start">
+        <h2 className="font-calistoga text-3xl lg:text-4xl text-[#1A1A1A] mb-4">Immer noch Fragen?</h2>
+        <p className="font-nunito text-[#8A8A8A] text-lg leading-relaxed">
+          Schreib uns dein Anliegen, und unser Team kümmert sich persönlich darum. 
+          Wir antworten in der Regel innerhalb von 24 Stunden.
+        </p>
+      </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      {/* 2/3 Golden Ratio Column */}
+      <div className="lg:w-2/3 flex flex-col gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
           <label className="block text-sm font-bold text-[#8A8A8A] mb-2 ml-2 uppercase tracking-wider">Dein Name</label>
           <input 
@@ -235,14 +243,15 @@ const ContactFormBlock = () => {
         />
       </div>
 
-      <button 
-        type="submit" disabled={isSubmitting}
-        className="mt-4 w-full bg-[#1A1A1A] hover:bg-[#C41E3A] text-white py-5 rounded-[24px] font-bold text-lg flex items-center justify-center gap-3 transition-colors duration-300 disabled:opacity-50 disabled:hover:bg-[#1A1A1A]"
-      >
-        {isSubmitting ? 'Wird gesendet...' : (
-          <>Nachricht absenden <Send size={20} /></>
-        )}
-      </button>
+        <button 
+          type="submit" disabled={isSubmitting}
+          className="mt-4 w-full bg-[#1A1A1A] hover:bg-[#C41E3A] text-white py-5 rounded-[24px] font-bold text-lg flex items-center justify-center gap-3 transition-colors duration-300 disabled:opacity-50 disabled:hover:bg-[#1A1A1A]"
+        >
+          {isSubmitting ? 'Wird gesendet...' : (
+            <>Nachricht absenden <Send size={20} /></>
+          )}
+        </button>
+      </div>
     </motion.form>
   );
 };
@@ -285,28 +294,30 @@ export default function SupportPage() {
       <TreeBackground />
       
       {/* Hero Header */}
-      <section className="relative z-10 pt-[140px] pb-[60px] px-6 text-center">
+      <section className="relative z-10 pt-32 md:pt-40 pb-16 md:pb-24 px-6 text-center max-w-full overflow-hidden">
         <motion.div
           initial={{ opacity: 0, scale: 0.9, y: 30 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           transition={{ duration: 0.8, type: 'spring' }}
+          className="max-w-4xl mx-auto"
         >
-          <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-white border border-[#E8D5C4] shadow-sm mb-6">
+          <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-white border border-[#E8D5C4] shadow-sm mb-8">
             <span className="w-2 h-2 rounded-full bg-[#10B981] animate-pulse" />
             <span className="font-nunito font-bold text-sm text-[#4A4A4A] tracking-widest uppercase">Support Center</span>
           </div>
-          <h1 className="font-calistoga text-[clamp(2.5rem,6vw,5rem)] text-[#1A1A1A] mb-6 leading-tight">
+          <h1 className="font-calistoga text-[clamp(2.5rem,6vw,5rem)] text-[#1A1A1A] mb-8 leading-tight">
             Problemlösung, <br />
             <span className="text-[#C41E3A] italic">organisch & schnell.</span>
           </h1>
-          <p className="font-nunito text-[clamp(1rem,2vw,1.3rem)] text-[#8A8A8A] max-w-2xl mx-auto leading-relaxed">
+          {/* Golden ratio w-2/3 width on text */}
+          <p className="font-nunito text-[clamp(1.125rem,2vw,1.25rem)] text-[#8A8A8A] w-full md:w-2/3 mx-auto leading-loose">
             Klick dich durch unseren Support-Baum. Er wächst mit deinen Antworten und führt dich zielgenau zur Lösung deines Anliegens.
           </p>
         </motion.div>
       </section>
 
       {/* ORGANIC TROUBLESHOOTING TREE */}
-      <section className="relative z-10 max-w-4xl mx-auto px-6 pb-[100px]">
+      <section className="relative z-10 max-w-4xl mx-auto px-6 py-16 w-full overflow-hidden">
         <div className="flex flex-col gap-8 relative">
           
           {/* Vertical connection line in the background */}
@@ -345,7 +356,7 @@ export default function SupportPage() {
                       <div className="absolute top-0 right-0 w-40 h-40 bg-[#10B981]/5 rounded-bl-full pointer-events-none" />
                       
                       <h3 className="font-calistoga text-3xl text-[#1A1A1A] mb-4">{result.title}</h3>
-                      <p className="font-nunito text-lg text-[#4A4A4A] leading-relaxed mb-8">{result.description}</p>
+                      <p className="font-nunito text-lg text-[#4A4A4A] leading-loose mb-8">{result.description}</p>
                       
                       <div className="flex flex-col sm:flex-row gap-4 items-center">
                         {result.action && (
@@ -442,7 +453,7 @@ export default function SupportPage() {
       </section>
 
       {/* MANUAL CONTACT SECTION */}
-      <section className="relative z-10 max-w-4xl mx-auto px-6 pb-[100px]">
+      <section className="relative z-10 max-w-5xl mx-auto px-6 py-24 w-full overflow-hidden">
         <div className="flex items-center gap-4 mb-10">
           <div className="h-[2px] flex-1 bg-gradient-to-r from-transparent to-[#E8D5C4]" />
           <span className="font-nunito font-black text-[#8A8A8A] uppercase tracking-[0.2em] px-4">Oder manuell</span>

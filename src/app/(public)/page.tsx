@@ -34,51 +34,54 @@ export default function HomePage() {
   const { bestsellers, reviews, config } = AYKIN_DATA;
 
   return (
-    <div className="animate-fade-in">
-      <Hero />
+    <div className="animate-fade-in overflow-hidden w-full max-w-[100vw]">
+      {/* ─── Hero Wrapper ──────────────────────────────────────────────── */}
+      <div className="relative w-full overflow-hidden max-w-[100vw]">
+        <Hero />
+      </div>
 
       {/* ─── Intro / Über Aykin ──────────────────────────────────────── */}
-      <section className="bg-[#FAF8F5] pt-[88px] pb-[80px]">
+      <section className="bg-[#FAF8F5] py-24 w-full overflow-hidden">
         <FadeUp>
-          <div className="max-w-[1200px] mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-14 items-center">
-            {/* Image blob */}
-            <div className="relative">
-              <div className="overflow-hidden aspect-[4/5]" style={{ borderRadius: '44% 56% 50% 50%/52% 48% 52% 48%' }}>
-                <FoodIcon icon="Heart" label="3D Druck Werkstatt\nAykin Produktion" size="sq" shape="rounded-none" className="w-full h-full" />
+          <div className="max-w-[1200px] mx-auto px-6 lg:px-8 flex flex-col lg:flex-row gap-16 items-center">
+            {/* Image blob - Golden Ratio 1/3 */}
+            <div className="relative w-full lg:w-1/3 flex-shrink-0">
+              <div className="overflow-hidden aspect-[4/5] mx-auto max-w-[320px] lg:max-w-none" style={{ borderRadius: '44% 56% 50% 50%/52% 48% 52% 48%' }}>
+                <FoodIcon icon="Heart" label="3D Druck Werkstatt\nAykin Produktion" size="sq" shape="rounded-none" className="w-full h-full object-cover" />
               </div>
               {/* Rating badge */}
-              <div className="absolute -bottom-4 -right-2 bg-[#C41E3A] text-white px-4 py-3 rounded-2xl shadow-terra">
-                <div className="font-calistoga text-[1.8rem] leading-none">{config.rating}★</div>
-                <div className="font-nunito text-[0.68rem] font-extrabold opacity-90 mt-0.5">
+              <div className="absolute -bottom-4 -right-2 lg:-right-6 bg-[#C41E3A] text-white px-5 py-4 rounded-2xl shadow-terra z-10">
+                <div className="font-calistoga text-[2rem] leading-none">{config.rating}★</div>
+                <div className="font-nunito text-[0.7rem] font-extrabold opacity-90 mt-1">
                   {config.reviewCount}+ Google Reviews
                 </div>
               </div>
             </div>
 
-            {/* Copy */}
-            <div>
-              <div className="flex gap-2.5 mb-4">
+            {/* Copy - Golden Ratio 2/3 */}
+            <div className="w-full lg:w-2/3 flex flex-col items-start">
+              <div className="flex gap-3 mb-6">
                 <StampBadge text="Für alle Branchen" size={84} rotate={-10} />
                 <StampBadge text="Made in Germany" size={76} rotate={8} color="#4A4A4A" />
               </div>
-              <h2 className="font-calistoga text-[clamp(1.7rem,3.5vw,2.7rem)] text-[#1A1A1A] mb-4 leading-[1.1]">
+              <h2 className="font-calistoga text-[clamp(2rem,4vw,3.2rem)] text-[#1A1A1A] mb-6 leading-tight">
                 Dein Partner für<br/><span className="text-[#C41E3A]">individuelle Lösungen</span>
               </h2>
-              <p className="font-nunito text-[0.97rem] text-[#4A4A4A] leading-[1.85] mb-7 max-w-[440px]">
+              <p className="font-nunito text-base md:text-lg text-[#4A4A4A] leading-relaxed mb-10 max-w-[540px]">
                 Bei Aykin dreht sich alles um maßgeschneiderte 3D-Drucklösungen. Ob Prototyp, Ersatzteil
                 oder kreatives Projekt — wir bringen deine Ideen in Form.
               </p>
 
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full max-w-[600px]">
                 {[
                   ['FDM-Druck', 'Robuste Funktionsteile'],
                   ['SLA-Druck', 'Detailreiche Modelle'],
                   ['Prototypen', 'Schnelle Iterationen'],
                   ['Individuell', 'Nach deinen Wünschen']
                 ].map(([t, d]) => (
-                  <div key={t} className="bg-[#F2E8E0] rounded-[14px] px-4 py-3.5">
-                    <div className="font-nunito font-black text-[0.84rem] text-[#1A1A1A]">{t}</div>
-                    <div className="font-nunito text-[0.75rem] text-[#8A8A8A] mt-0.5">{d}</div>
+                  <div key={t} className="bg-[#F2E8E0] rounded-2xl px-5 py-4 transition-transform hover:-translate-y-1 hover:shadow-md">
+                    <div className="font-nunito font-black text-sm text-[#1A1A1A] leading-relaxed">{t}</div>
+                    <div className="font-nunito text-xs text-[#8A8A8A] mt-1 leading-relaxed">{d}</div>
                   </div>
                 ))}
               </div>
@@ -88,16 +91,24 @@ export default function HomePage() {
       </section>
 
       {/* ─── Bestsellers ───────────────────────────────────────────────────── */}
-      <BestsellersSection />
+      <div className="w-full overflow-hidden">
+        <BestsellersSection />
+      </div>
 
       {/* ─── Values ────────────────────────────────────────────────────────── */}
-      <ValuesSection />
+      <div className="w-full overflow-hidden">
+        <ValuesSection />
+      </div>
 
       {/* ─── Reviews ───────────────────────────────────────────────────────── */}
-      <ReviewsSection reviews={reviews} config={config} />
+      <div className="w-full overflow-hidden">
+        <ReviewsSection reviews={reviews} config={config} />
+      </div>
       
       {/* ─── Newsletter ────────────────────────────────────────────────────── */}
-      <NewsletterSection />
+      <div className="w-full overflow-hidden">
+        <NewsletterSection />
+      </div>
 
       <style dangerouslySetInnerHTML={{ __html: `
         @keyframes blobFloat { 0%,100%{transform:translate(0,0)} 33%{transform:translate(6px,-10px)} 66%{transform:translate(-5px,7px)} }

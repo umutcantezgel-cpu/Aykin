@@ -32,8 +32,8 @@ export function Header() {
   
   // Floating dynamics
   const headerTop = useTransform(scrollY, [0, 120], [0, 24]);
-  const headerWidth = useTransform(scrollY, [0, 120], ["100%", "90%"]);
-  const headerMaxWidth = useTransform(scrollY, [0, 120], ["100%", "1000px"]);
+  const headerWidth = useTransform(scrollY, [0, 120], ["100%", "95%"]);
+  const headerMaxWidth = useTransform(scrollY, [0, 120], ["100%", "1400px"]);
   const headerRadius = useTransform(scrollY, [0, 120], [0, 100]);
   const headerBorder = useTransform(scrollY, [0, 120], ["rgba(250,248,245, 0)", "rgba(196,30,58, 0.1)"]); // subtle terracotta border
   
@@ -48,7 +48,8 @@ export function Header() {
     { id: "showcase", href: "/showcase", label: "Showcase" },
     { id: "faq", href: "/faq", label: "FAQ" },
     { id: "ueber-uns", href: "/ueber-uns", label: "Über Uns" },
-    { id: "kontakt", href: "/kontakt", label: "Standort & Kontakt" },
+    { id: "support", href: "/support", label: "Support" },
+    { id: "kontakt", href: "/kontakt", label: "Kontakt" },
   ];
 
   return (
@@ -126,7 +127,7 @@ export function Header() {
             <div className="flex items-center gap-3">
               {/* PrimaryCTA Desktop */}
               <div className="hidden lg:block">
-                <TransitionLink href="/menu" tabIndex={-1}>
+                <TransitionLink href="/anfrage" tabIndex={-1}>
                   <PrimaryCTA className="py-2.5 px-6 text-sm" showArrow>
                     Anfrage starten
                   </PrimaryCTA>

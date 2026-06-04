@@ -253,7 +253,7 @@ function InteractiveExplodedView({ marvel }: { marvel: EngineeringMarvel }) {
   const toggleExplode = () => setIsExploded(!isExploded);
 
   return (
-    <div className="flex flex-col lg:flex-row gap-12 items-stretch min-h-[600px] w-full bg-white rounded-[3rem] p-8 md:p-12 shadow-2xl border border-gray-100 mb-24 overflow-hidden relative">
+    <div className="flex flex-col lg:flex-row gap-12 lg:gap-16 items-stretch min-h-[600px] w-full max-w-full bg-white rounded-[3rem] p-8 md:p-12 lg:p-16 shadow-2xl border border-gray-100 mb-24 overflow-hidden relative">
       
       {/* Dynamic Background Pattern */}
       <div 
@@ -265,7 +265,7 @@ function InteractiveExplodedView({ marvel }: { marvel: EngineeringMarvel }) {
       />
 
       {/* Left Content Column */}
-      <div className="lg:w-1/3 flex flex-col justify-center relative z-10">
+      <div className="w-full lg:w-[38.2%] flex flex-col justify-center relative z-10 max-w-full">
         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gray-100 text-gray-800 font-bold text-sm w-fit mb-6">
           <span className="w-2 h-2 rounded-full" style={{ backgroundColor: marvel.themeColor }} />
           Interactive 3D
@@ -274,17 +274,17 @@ function InteractiveExplodedView({ marvel }: { marvel: EngineeringMarvel }) {
         <h2 className="font-calistoga text-4xl md:text-5xl text-gray-900 mb-4">{marvel.title}</h2>
         <h3 className="font-bold text-xl mb-6" style={{ color: marvel.themeColor }}>{marvel.subtitle}</h3>
         
-        <p className="text-lg text-gray-600 mb-8 leading-relaxed">
+        <p className="text-lg text-gray-600 mb-8 leading-loose">
           {marvel.description}
         </p>
 
-        <div className="bg-gray-50 rounded-2xl p-6 border border-gray-100 mb-8">
+        <div className="bg-gray-50 rounded-2xl p-6 border border-gray-100 mb-8 max-w-full overflow-hidden">
           <h4 className="font-bold text-gray-900 mb-4 flex items-center gap-2">
             <InfoIcon /> Technische Spezifikationen
           </h4>
           <ul className="space-y-3">
             {marvel.technicalDetails.map((detail, idx) => (
-              <li key={idx} className="flex items-start gap-3 text-sm text-gray-600">
+              <li key={idx} className="flex items-start gap-3 text-sm text-gray-600 leading-relaxed">
                 <span className="w-1.5 h-1.5 rounded-full mt-1.5 shrink-0" style={{ backgroundColor: marvel.themeColor }} />
                 <span>{detail}</span>
               </li>
@@ -294,7 +294,7 @@ function InteractiveExplodedView({ marvel }: { marvel: EngineeringMarvel }) {
 
         <button 
           onClick={toggleExplode}
-          className="group flex items-center justify-center gap-3 w-full py-4 px-8 rounded-2xl font-bold text-white transition-all duration-300 hover:shadow-lg hover:-translate-y-1"
+          className="group flex items-center justify-center gap-3 w-full max-w-full py-4 px-8 rounded-2xl font-bold text-white transition-all duration-300 hover:shadow-lg hover:-translate-y-1"
           style={{ backgroundColor: marvel.themeColor }}
         >
           {isExploded ? <ArrowsIn /> : <ArrowsOut />}
@@ -303,7 +303,7 @@ function InteractiveExplodedView({ marvel }: { marvel: EngineeringMarvel }) {
       </div>
 
       {/* Right Interactive 3D Canvas Column */}
-      <div className="lg:w-2/3 relative rounded-3xl bg-gray-900 overflow-hidden min-h-[500px] flex items-center justify-center cursor-grab active:cursor-grabbing border-4 border-gray-100 shadow-inner">
+      <div className="w-full lg:w-[61.8%] relative rounded-3xl bg-gray-900 overflow-hidden min-h-[500px] flex items-center justify-center cursor-grab active:cursor-grabbing border-4 border-gray-100 shadow-inner max-w-full">
         
         {/* Helper text overlay */}
         <div className="absolute top-6 left-6 text-white/50 text-sm font-mono flex items-center gap-2 pointer-events-none z-20">
@@ -337,7 +337,7 @@ function InteractiveExplodedView({ marvel }: { marvel: EngineeringMarvel }) {
         />
 
         {/* 3D Scene */}
-        <div className="relative w-full h-full flex items-center justify-center pointer-events-none" style={{ perspective: "1200px" }}>
+        <div className="relative w-full h-full flex items-center justify-center pointer-events-none max-w-full" style={{ perspective: "1200px" }}>
           <motion.div 
             className="relative w-64 h-64 pointer-events-auto"
             style={{
@@ -409,23 +409,25 @@ export default function ShowcasePage() {
   });
 
   return (
-    <main className="bg-[#FAF8F5] min-h-screen relative overflow-hidden">
+    <main className="bg-[#FAF8F5] min-h-screen relative overflow-hidden w-full max-w-full">
       {/* Progress Bar */}
       <motion.div
-        className="fixed top-0 left-0 right-0 h-1.5 bg-[#1A1A1A] transform origin-left z-50"
+        className="fixed top-0 left-0 right-0 h-1.5 bg-[#1A1A1A] transform origin-left z-50 max-w-full"
         style={{ scaleX }}
       />
 
-      <SubpageHero 
-        label="Engineering Masterclass"
-        title="Interaktiver Showcase"
-        subtitle="Erlebe die Magie des 3D-Drucks hautnah. Ziehe die Modelle auseinander, studiere die Mechanik und verstehe, warum unsere Konstruktionen halten, was sie versprechen."
-      />
+      <div className="w-full max-w-full overflow-hidden relative">
+        <SubpageHero 
+          label="Engineering Masterclass"
+          title="Interaktiver Showcase"
+          subtitle="Erlebe die Magie des 3D-Drucks hautnah. Ziehe die Modelle auseinander, studiere die Mechanik und verstehe, warum unsere Konstruktionen halten, was sie versprechen."
+        />
+      </div>
 
-      <div className="max-w-7xl mx-auto px-6 py-20 relative z-10">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8 py-24 lg:py-32 relative z-10 w-full max-w-full overflow-hidden">
         <div className="text-center max-w-3xl mx-auto mb-20">
-          <h2 className="font-calistoga text-4xl text-gray-900 mb-6">Jedes Detail durchdacht</h2>
-          <p className="text-lg text-gray-600">
+          <h2 className="font-calistoga text-4xl lg:text-5xl text-gray-900 mb-6">Jedes Detail durchdacht</h2>
+          <p className="text-lg text-gray-600 leading-loose">
             Ein gutes 3D-Druckteil beginnt lange vor dem Slicer. Die richtige Orientierung der Layer, Toleranzberechnungen für Schrumpfung und die Berücksichtigung von Überhängen machen den Unterschied zwischen einem Hobby-Druck und einem industrietauglichen Bauteil.
           </p>
         </div>

@@ -138,10 +138,10 @@ export const AYKIN_DATA: AppData = {
     },
   },
   bestsellers: [
-    { id: "bs1", name: "Lithophane Fotodruck", desc: "Dein Lieblingsfoto als beleuchteter 3D-Druck", price: "ab 24,00 €", tag: "Bestseller", icon: "Image" },
-    { id: "bs2", name: "Custom Prototyp", desc: "Vom CAD-Modell zum greifbaren Objekt in 48h", price: "ab 49,00 €", tag: "Beliebt", icon: "Box" },
-    { id: "bs3", name: "Tabletop-Miniaturen", desc: "Hochdetaillierte Figuren im Resin-Druck", price: "ab 8,00 €", tag: "Detailreich", icon: "Layers" },
-    { id: "bs4", name: "Ersatzteil-Nachbau", desc: "Wenn das Original nicht mehr lieferbar ist", price: "ab 14,00 €", tag: "Praktisch", icon: "Wrench" },
+    { id: "cs1", name: "Industrial Rapid Prototyping", desc: "Vom CAD-Konzept zum funktionalen Prototyp in 48 Stunden", price: "Custom Engineering", tag: "B2B Fokus", icon: "Box" },
+    { id: "cs2", name: "Reverse Engineering", desc: "Digitalisierung und Rekonstruktion nicht mehr lieferbarer Bauteile", price: "Custom Engineering", tag: "Lösung", icon: "Settings" },
+    { id: "cs3", name: "Funktionale Baugruppen", desc: "Gedruckte Mechaniken, Snap-Fits und mehrteilige Systeme", price: "Custom Engineering", tag: "Komplexität", icon: "Layers" },
+    { id: "cs4", name: "Topologie-Leichtbau", desc: "Materialoptimierte Konstruktion für maximale Gewichtseinsparung", price: "Custom Engineering", tag: "Innovation", icon: "Zap" },
   ],
   reviews: [
     { id: "r1", name: "Markus T.", stars: 5, text: "Die Qualität der Prototypen ist hervorragend. Schnelle Lieferung und super Kommunikation. Kann Aykin nur weiterempfehlen!" },

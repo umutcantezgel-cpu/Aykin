@@ -22,7 +22,7 @@ export function BestsellersSection() {
       </div>
 
       <FadeUp className="max-w-[1200px] mx-auto px-6 pt-7">
-        <SectionTitle sub="Höchste Präzision und individuelle Fertigung — das überzeugt.">Unsere Highlights</SectionTitle>
+        <SectionTitle sub="Wir lösen individuelle Herausforderungen durch High-End Engineering.">Custom Solutions</SectionTitle>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
           {bestsellers.map((item) => (
@@ -30,8 +30,8 @@ export function BestsellersSection() {
           ))}
         </div>
         <div className="text-center mt-10">
-          <TransitionLink href="/menu">
-            <PrimaryButton large sectionBg="#F2E8E0">Alle Produkte ansehen</PrimaryButton>
+          <TransitionLink href="/produkte">
+            <PrimaryButton large sectionBg="#F2E8E0">Alle Solutions entdecken</PrimaryButton>
           </TransitionLink>
         </div>
       </FadeUp>

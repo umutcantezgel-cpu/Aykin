@@ -257,20 +257,16 @@ function MaterialSection({ material, index }: { material: MaterialData, index: n
     <motion.section 
       ref={sectionRef} 
       style={{ opacity }}
-      className={`min-h-screen py-32 px-6 relative overflow-hidden flex items-center ${isEven ? 'bg-[#FAF8F5]' : 'bg-white'}`}
+      className={`min-h-screen w-full max-w-full py-24 md:py-32 px-6 relative overflow-hidden flex items-center ${isEven ? 'bg-[#FAF8F5]' : 'bg-white'}`}
       id={material.id}
     >
       {/* Dynamic Background Elements */}
       <motion.div 
-        style={{ y: useTransform(scrollYProgress, [0, 1], [300, -300]) }}
         className="absolute top-0 right-0 w-[800px] h-[800px] rounded-full opacity-5 blur-3xl pointer-events-none"
-        // @ts-ignore
         style={{ backgroundColor: material.themeColor, y: useTransform(scrollYProgress, [0, 1], [300, -300]) }}
       />
       <motion.div 
-        style={{ y: useTransform(scrollYProgress, [0, 1], [-200, 200]) }}
         className="absolute bottom-0 left-0 w-[600px] h-[600px] rounded-full opacity-5 blur-3xl pointer-events-none"
-        // @ts-ignore
         style={{ backgroundColor: material.themeColor, y: useTransform(scrollYProgress, [0, 1], [-200, 200]) }}
       />
 
@@ -280,8 +276,8 @@ function MaterialSection({ material, index }: { material: MaterialData, index: n
           className="flex flex-col gap-16"
         >
           {/* Header Section */}
-          <div className="flex flex-col md:flex-row gap-8 items-start justify-between">
-            <div className="max-w-2xl">
+          <div className="flex flex-col lg:flex-row gap-8 lg:gap-16 items-start justify-between w-full">
+            <div className="w-full lg:w-2/3">
               <div className="flex items-center gap-4 mb-6">
                 <span className="font-mono text-xl font-bold tracking-widest" style={{ color: material.themeColor }}>
                   M{String(index + 1).padStart(2, '0')}
@@ -292,12 +288,12 @@ function MaterialSection({ material, index }: { material: MaterialData, index: n
                 {material.name.split(' ')[0]} <span className="text-gray-400">{material.name.split(' ').slice(1).join(' ')}</span>
               </h2>
               <p className="text-2xl text-gray-600 font-medium mb-6">{material.tagline}</p>
-              <p className="text-lg text-gray-700 leading-relaxed mb-4">{material.description}</p>
-              <p className="text-base text-gray-500 leading-relaxed">{material.extendedDescription}</p>
+              <p className="text-lg text-gray-700 leading-loose mb-4">{material.description}</p>
+              <p className="text-base text-gray-500 leading-loose">{material.extendedDescription}</p>
             </div>
 
             {/* Print Parameters Card */}
-            <div className="w-full md:w-auto bg-white border border-gray-100 shadow-2xl rounded-3xl p-8 shrink-0">
+            <div className="w-full lg:w-1/3 bg-white border border-gray-100 shadow-2xl rounded-3xl p-8 shrink-0">
               <h3 className="text-xl font-bold mb-6 text-gray-900 flex items-center gap-3">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ color: material.themeColor }}><path d="M12 2v20"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
                 Druckparameter
@@ -321,10 +317,10 @@ function MaterialSection({ material, index }: { material: MaterialData, index: n
           <div className="h-px w-full bg-gradient-to-r from-transparent via-gray-200 to-transparent my-4" />
 
           {/* Main Content Grid */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 w-full">
             
             {/* Properties Rings */}
-            <div className="lg:col-span-7">
+            <div className="lg:col-span-8">
               <h3 className="text-2xl font-bold mb-10 text-gray-900">Physikalische Eigenschaften</h3>
               <div className="grid grid-cols-2 md:grid-cols-3 gap-x-8 gap-y-12">
                 {material.properties.map((prop, i) => (
@@ -334,7 +330,7 @@ function MaterialSection({ material, index }: { material: MaterialData, index: n
             </div>
 
             {/* Pros/Cons & Applications */}
-            <div className="lg:col-span-5 flex flex-col gap-12">
+            <div className="lg:col-span-4 flex flex-col gap-12">
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-8">
                 {/* Pros */}
                 <div className="bg-emerald-50/50 rounded-3xl p-8 border border-emerald-100">
@@ -418,7 +414,7 @@ export default function MaterialienLexikonPage() {
   }, []);
 
   return (
-    <main className="bg-[#FAF8F5] min-h-screen relative">
+    <main className="bg-[#FAF8F5] min-h-screen relative overflow-x-hidden max-w-full">
       {/* Global Scroll Progress Bar */}
       <motion.div
         className="fixed top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-[#C41E3A] via-[#E07A5F] to-[#81B29A] transform origin-left z-50"

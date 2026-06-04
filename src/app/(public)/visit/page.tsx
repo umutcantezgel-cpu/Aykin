@@ -54,7 +54,7 @@ const ScrollingTypography = ({ text, direction = 1, speed = 1 }: any) => {
   const springX = useSpring(x, { stiffness: 100, damping: 30, restDelta: 0.001 });
 
   return (
-    <div className="overflow-hidden whitespace-nowrap py-10 opacity-10 pointer-events-none select-none">
+    <div className="overflow-hidden whitespace-nowrap py-10 opacity-10 pointer-events-none select-none max-w-full w-full">
       <motion.h2 
         style={{ x: springX }}
         className="font-calistoga text-[15vw] text-[#1A1A1A] uppercase tracking-tighter leading-none"
@@ -73,11 +73,11 @@ export default function VisitPage() {
   const heroY = useTransform(scrollYProgress, [0, 0.1], [0, 100]);
 
   return (
-    <div ref={containerRef} className="min-h-screen bg-[#FAF8F5] relative">
+    <div ref={containerRef} className="min-h-screen bg-[#FAF8F5] relative max-w-full overflow-x-hidden">
       {/* MASSIVE HERO PARALLAX SECTION */}
       <motion.section 
         style={{ opacity: heroOpacity, scale: heroScale, y: heroY }}
-        className="sticky top-0 h-screen bg-[#F2E8E0] flex flex-col items-center justify-center px-6 overflow-hidden z-0"
+        className="sticky top-0 h-[100svh] bg-[#F2E8E0] flex flex-col items-center justify-center px-6 overflow-hidden z-0 max-w-full w-full"
       >
         <div className="absolute inset-0 opacity-[0.22] dot-bg" />
         
@@ -156,14 +156,14 @@ export default function VisitPage() {
         </motion.div>
       </motion.section>
 
-      {/* VIRTUAL PARALLAX TOUR */}
-      <section className="relative z-10 bg-[#FAF8F5] pt-24 pb-40 overflow-hidden">
-        <ScrollingTypography text="Wetzlar Aykin Studio" direction={1} speed={1.5} />
+      {/* CONTENT BLOCK WITH PARALLAX */}
+      <section className="relative z-10 bg-[#FAF8F5] rounded-t-[40px] mt-[-40px] shadow-[0_-20px_50px_rgba(0,0,0,0.05)] border-t border-white overflow-hidden max-w-full">
         
-        <div className="max-w-[1400px] mx-auto px-6 mt-10">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+        {/* First Parallax Block */}
+        <div className="max-w-[1400px] mx-auto px-6 py-24 lg:py-32">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-center">
             
-            <div className="lg:col-span-5 relative h-[70vh] min-h-[600px]">
+            <div className="lg:col-span-7 relative h-[60vh] min-h-[500px]">
               <ParallaxImage 
                 src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?q=80&w=2000&auto=format&fit=crop"
                 alt="Restaurant Interior"
@@ -181,12 +181,12 @@ export default function VisitPage() {
               />
             </div>
 
-            <div className="lg:col-span-6 lg:col-start-7">
+            <div className="lg:col-span-5">
               <FadeUp className="mb-8">
                 <h2 className="font-calistoga text-5xl lg:text-7xl text-[#1A1A1A] mb-6 leading-tight">
                   Architektur <br/><span className="text-[#8A8A8A]">& Atmosphäre</span>
                 </h2>
-                <p className="font-nunito text-xl text-[#4A4A4A] leading-relaxed mb-10">
+                <p className="font-nunito text-xl text-[#4A4A4A] leading-loose mb-10">
                   Unser Studio in Wetzlar vereint modernes Design mit gemütlicher Gastfreundschaft. Ein Ort, der dazu einlädt, den Moment zu genießen, sich auszutauschen und kulinarische Highlights zu erleben.
                 </p>
                 <div className="grid grid-cols-2 gap-6">
@@ -211,10 +211,10 @@ export default function VisitPage() {
         <ScrollingTypography text="Erlebe Den Moment" direction={-1} speed={1.2} />
 
         {/* Second Parallax Block */}
-        <div className="max-w-[1400px] mx-auto px-6 mt-32">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+        <div className="max-w-[1400px] mx-auto px-6 pb-24 lg:pb-32 mt-24 lg:mt-32">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-center">
             
-            <div className="lg:col-span-5 lg:order-2 relative h-[60vh] min-h-[500px]">
+            <div className="lg:col-span-7 lg:order-2 relative h-[60vh] min-h-[500px]">
               <ParallaxImage 
                 src="https://images.unsplash.com/photo-1559339352-11d035aa65de?q=80&w=2000&auto=format&fit=crop"
                 alt="Details and Food"
@@ -227,12 +227,12 @@ export default function VisitPage() {
               />
             </div>
 
-            <div className="lg:col-span-6 lg:order-1">
+            <div className="lg:col-span-5 lg:order-1">
               <FadeUp>
                 <h2 className="font-calistoga text-5xl lg:text-7xl text-[#1A1A1A] mb-6 leading-tight">
                   Liebe zum <br/><span className="text-[#C41E3A]">Detail</span>
                 </h2>
-                <p className="font-nunito text-xl text-[#4A4A4A] leading-relaxed mb-10">
+                <p className="font-nunito text-xl text-[#4A4A4A] leading-loose mb-10">
                   Von der sorgfältigen Auswahl unserer Zutaten bis hin zur Präsentation auf dem Teller – wir überlassen nichts dem Zufall.
                 </p>
                 <ul className="space-y-6">
@@ -252,11 +252,11 @@ export default function VisitPage() {
       </section>
 
       {/* LOCATION & INFO SECTION */}
-      <section id="location" className="relative z-20 bg-white py-32 rounded-t-[40px] shadow-[0_-20px_50px_rgba(0,0,0,0.03)] border-t border-[#F2E8E0]">
+      <section id="location" className="relative z-20 bg-white py-24 lg:py-32 rounded-t-[40px] shadow-[0_-20px_50px_rgba(0,0,0,0.03)] border-t border-[#F2E8E0] overflow-hidden max-w-full">
         <div className="max-w-[1400px] mx-auto px-6">
           <div className="text-center mb-20">
             <h2 className="font-calistoga text-5xl md:text-6xl text-[#1A1A1A] mb-6">Wir erwarten dich</h2>
-            <p className="font-nunito text-xl text-[#8A8A8A] max-w-2xl mx-auto">
+            <p className="font-nunito text-xl text-[#8A8A8A] leading-loose max-w-2xl mx-auto">
               Finde deinen Weg zu uns oder kontaktiere uns bei Fragen. Wir haben immer ein offenes Ohr für dich.
             </p>
           </div>
@@ -321,7 +321,7 @@ export default function VisitPage() {
       </section>
 
       {/* CTA SECTION */}
-      <section className="bg-[#1A1A1A] py-32 relative overflow-hidden">
+      <section className="bg-[#1A1A1A] py-24 lg:py-32 relative overflow-hidden max-w-full">
         <div className="absolute inset-0 opacity-20">
           <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
             <defs>
@@ -336,7 +336,7 @@ export default function VisitPage() {
         <div className="max-w-4xl mx-auto px-6 relative z-10 text-center">
           <FadeUp>
             <h2 className="font-calistoga text-5xl md:text-7xl text-white mb-8">Hungrig geworden?</h2>
-            <p className="font-nunito text-xl text-gray-400 mb-12 max-w-2xl mx-auto">
+            <p className="font-nunito text-xl text-gray-400 leading-loose mb-12 max-w-2xl mx-auto">
               Bestelle jetzt bequem online oder besuche uns im Studio. Wir freuen uns auf dich!
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
