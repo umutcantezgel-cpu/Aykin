@@ -179,7 +179,12 @@ function TiltCard({
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       onClick={onClick}
-      style={{ rotateX, rotateY, transformStyle: 'preserve-3d' }}
+      style={{ 
+        rotateX, 
+        rotateY, 
+        transformStyle: 'preserve-3d',
+        borderColor: isActive ? accentColor : undefined
+      }}
       whileHover={{ scale: 1.02 }}
       whileTap={{ scale: 0.98 }}
       className={`
@@ -190,7 +195,6 @@ function TiltCard({
           : 'bg-white/40 border-white/50 hover:bg-white/80 hover:border-white shadow-sm'}
         ${className}
       `}
-      style={{ borderColor: isActive ? accentColor : undefined }}
     >
       {/* Glow Effect */}
       {isActive && (
@@ -416,7 +420,7 @@ export default function ConfiguratorPage() {
                     <motion.div
                       key="step1"
                       custom={direction}
-                      variants={slideVariants}
+                      variants={slideVariants as any}
                       initial="enter"
                       animate="center"
                       exit="exit"
@@ -466,7 +470,7 @@ export default function ConfiguratorPage() {
                     <motion.div
                       key="step2"
                       custom={direction}
-                      variants={slideVariants}
+                      variants={slideVariants as any}
                       initial="enter"
                       animate="center"
                       exit="exit"
@@ -510,7 +514,7 @@ export default function ConfiguratorPage() {
                     <motion.div
                       key="step3"
                       custom={direction}
-                      variants={slideVariants}
+                      variants={slideVariants as any}
                       initial="enter"
                       animate="center"
                       exit="exit"
@@ -559,7 +563,7 @@ export default function ConfiguratorPage() {
                     <motion.div
                       key="step4"
                       custom={direction}
-                      variants={slideVariants}
+                      variants={slideVariants as any}
                       initial="enter"
                       animate="center"
                       exit="exit"
