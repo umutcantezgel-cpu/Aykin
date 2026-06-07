@@ -140,70 +140,88 @@ const HorizontalScrollGallery = () => {
   const targetRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: targetRef,
+    offset: ["start start", "end end"]
   });
 
-  // Calculate smoother spring for gamified progress bar
   const springProgress = useSpring(scrollYProgress, { stiffness: 100, damping: 30, restDelta: 0.001 });
+  const xDesktop = useTransform(scrollYProgress, [0, 1], ["0%", "-72%"]);
+  const bgXDesktop = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
 
-  // Use roughly -72% to align the container perfectly with the viewport at the end.
-  const x = useTransform(scrollYProgress, [0, 1], ["0%", "-72%"]);
+  const [isDesktop, setIsDesktop] = useState(true);
+
+  useEffect(() => {
+    const checkSize = () => setIsDesktop(window.innerWidth >= 1024);
+    checkSize();
+    window.addEventListener('resize', checkSize);
+    return () => window.removeEventListener('resize', checkSize);
+  }, []);
 
   return (
-    <section ref={targetRef} className="relative h-[400vh] bg-[#0A0A0A]">
-      <div className="sticky top-0 flex h-screen items-center overflow-hidden">
+    <section ref={targetRef} className={`relative ${isDesktop ? 'h-[400vh]' : 'h-auto pb-24'} bg-[#0A0A0A]`}>
+      <div className={`${isDesktop ? 'sticky top-0 h-screen overflow-hidden' : 'relative flex flex-col pt-16'} flex items-center w-full`}>
         
         {/* Gamified Global Scroll Progress for this section */}
-        <div className="absolute bottom-8 lg:bottom-12 left-1/2 -translate-x-1/2 w-64 h-2 bg-white/10 rounded-full overflow-hidden z-50 shadow-[0_0_15px_rgba(196,30,58,0.3)]">
-          <motion.div 
-            className="h-full bg-[#C41E3A]" 
-            style={{ scaleX: springProgress, transformOrigin: "0% 50%" }}
-          />
-        </div>
+        {isDesktop && (
+          <div className="absolute bottom-8 lg:bottom-12 left-1/2 -translate-x-1/2 w-64 h-2 bg-white/10 rounded-full overflow-hidden z-50 shadow-[0_0_15px_rgba(196,30,58,0.3)]">
+            <motion.div 
+              className="h-full bg-[#C41E3A]" 
+              style={{ scaleX: springProgress, transformOrigin: "0% 50%" }}
+            />
+          </div>
+        )}
         
         {/* Floating background particles indicating "speed" */}
         <motion.div 
-          style={{ x: useTransform(scrollYProgress, [0, 1], ["0%", "50%"]) }}
-          className="absolute inset-0 opacity-20 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] z-0 pointer-events-none"
+          style={isDesktop ? { x: bgXDesktop } : {}}
+          className={`absolute inset-0 opacity-20 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] z-0 pointer-events-none ${!isDesktop && 'bg-fixed'}`}
         />
 
-        <motion.div style={{ x }} className="flex gap-12 lg:gap-16 px-12 lg:px-32 pb-16 pt-32 z-10 items-center">
+        <motion.div 
+          style={isDesktop ? { x: xDesktop } : {}} 
+          className={`flex gap-12 lg:gap-16 px-6 lg:px-32 z-10 ${isDesktop ? 'pb-16 pt-32 items-center flex-row w-max' : 'flex-col items-center w-full'}`}
+        >
           
           {/* Card 1: Intro / Call to Scroll */}
-          <div className="w-[30vw] min-w-[350px] lg:min-w-[400px] h-[80vh] flex flex-col justify-center shrink-0">
+          <div className={`${isDesktop ? 'w-[30vw] min-w-[350px] lg:min-w-[400px] h-[80vh] justify-center' : 'w-full py-16 justify-center items-center text-center'} flex flex-col shrink-0`}>
             <motion.h2 
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
               transition={{ duration: 0.8 }}
               className="text-5xl md:text-7xl font-calistoga text-white mb-6 leading-tight"
             >
-              Unsere <br/>
+              Unsere <br className={!isDesktop ? "hidden" : ""} />
               <span className="text-[#C41E3A]">Expertise.</span>
             </motion.h2>
             <motion.p 
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
               transition={{ duration: 0.8, delay: 0.2 }}
               className="text-white/60 text-lg lg:text-xl leading-relaxed lg:leading-loose mb-12 max-w-sm"
             >
               Entdecke das volle Spektrum unserer additiven Fertigungstechnologien und Ingenieursdienstleistungen. Scrolle weiter, um in unsere Prozesse einzutauchen.
             </motion.p>
-            <motion.div 
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              className="flex items-center gap-4 text-white/40"
-            >
-              <div className="w-16 h-[1px] bg-white/20" />
-              <span className="text-sm uppercase tracking-widest">Swipe to explore</span>
-              <div className="w-16 h-[1px] bg-white/20" />
-            </motion.div>
+            {isDesktop && (
+              <motion.div 
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: 0.4 }}
+                className="flex items-center gap-4 text-white/40"
+              >
+                <div className="w-16 h-[1px] bg-white/20" />
+                <span className="text-sm uppercase tracking-widest">Swipe to explore</span>
+                <div className="w-16 h-[1px] bg-white/20" />
+              </motion.div>
+            )}
           </div>
 
           {/* Card 2: FDM */}
-          <TiltCard className="w-[85vw] md:w-[70vw] lg:w-[60vw] min-w-[85vw] md:min-w-[700px] lg:min-w-[850px] h-[85vh] lg:h-[80vh] shrink-0 bg-[#141414] border border-white/10" glowColor="rgba(196,30,58,0.2)">
+          <TiltCard className={`${isDesktop ? 'w-[60vw] min-w-[850px] h-[80vh]' : 'w-full max-w-[90vw] h-auto min-h-[70vh]'} shrink-0 bg-[#141414] border border-white/10`} glowColor="rgba(196,30,58,0.2)">
             <div className="flex justify-between items-start w-full">
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 lg:w-16 lg:h-16 rounded-2xl bg-[#C41E3A]/10 flex items-center justify-center border border-[#C41E3A]/30">
+                <div className="w-12 h-12 lg:w-16 lg:h-16 rounded-2xl bg-[#C41E3A]/10 flex items-center justify-center border border-[#C41E3A]/30 shrink-0">
                   <Printer size={32} className="text-[#C41E3A]" />
                 </div>
                 <div>
@@ -211,12 +229,12 @@ const HorizontalScrollGallery = () => {
                   <p className="text-[#C41E3A] tracking-wider uppercase text-xs lg:text-sm mt-1 font-bold">Fused Deposition Modeling</p>
                 </div>
               </div>
-              <span className="text-7xl lg:text-8xl font-black text-white/5 font-calistoga select-none">01</span>
+              <span className="text-6xl lg:text-8xl font-black text-white/5 font-calistoga select-none ml-4">01</span>
             </div>
             
-            <div className="flex flex-col md:flex-row gap-6 lg:gap-12 mt-6 lg:mt-8 flex-grow min-h-0">
+            <div className={`flex flex-col ${isDesktop ? 'md:flex-row' : ''} gap-6 lg:gap-12 mt-6 lg:mt-8 flex-grow min-h-0`}>
               {/* Text Column with Scroll */}
-              <div className="w-full md:w-[45%] flex flex-col justify-start overflow-y-auto pr-2 md:pr-4 pb-4 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+              <div className={`w-full ${isDesktop ? 'md:w-[45%]' : ''} flex flex-col justify-start overflow-y-auto pr-2 md:pr-4 pb-4 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]`}>
                 <p className="text-white/70 text-sm md:text-base lg:text-lg leading-relaxed mb-6">
                   Unser FDM-Verfahren bietet die ideale Balance aus Geschwindigkeit, Kosten und mechanischer Belastbarkeit. 
                   Wir verwenden modernste Hochtemperaturdrucker für technische Kunststoffe, die selbst extremen Anforderungen standhalten.
@@ -235,60 +253,71 @@ const HorizontalScrollGallery = () => {
                     </div>
                   ))}
                 </div>
+                {!isDesktop && (
+                  <div className="mt-8">
+                    <TransitionLink href="/leistungen/fdm-druck">
+                      <MagneticButton className="w-full py-4 bg-white text-black font-bold rounded-xl flex items-center justify-center gap-2 hover:bg-[#C41E3A] hover:text-white transition-colors duration-300">
+                        Mehr zu FDM <ArrowRight size={18} />
+                      </MagneticButton>
+                    </TransitionLink>
+                  </div>
+                )}
               </div>
               
-              {/* Visual Column with Scroll */}
-              <div className="hidden md:flex w-full md:w-[55%] relative h-full rounded-3xl overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] border border-white/5 bg-gradient-to-br from-white/5 to-transparent p-6 lg:p-8 flex-col justify-between group">
-                <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-20 mix-blend-overlay pointer-events-none" />
-                <div className="relative z-10 flex justify-between items-center text-white/50 mb-4">
-                  <span className="text-xs tracking-widest uppercase">Technologien</span>
-                  <Activity size={16} />
+              {/* Visual Column */}
+              {isDesktop && (
+                <div className="hidden md:flex w-full md:w-[55%] relative h-full rounded-3xl overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] border border-white/5 bg-gradient-to-br from-white/5 to-transparent p-6 lg:p-8 flex-col justify-between group">
+                  <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-20 mix-blend-overlay pointer-events-none" />
+                  <div className="relative z-10 flex justify-between items-center text-white/50 mb-4">
+                    <span className="text-xs tracking-widest uppercase">Technologien</span>
+                    <Activity size={16} />
+                  </div>
+                  <div className="relative z-10 space-y-4">
+                     <div className="bg-black/40 backdrop-blur-md rounded-2xl p-4 border border-white/10 transform transition-transform group-hover:-translate-y-1">
+                       <div className="flex justify-between items-center mb-2">
+                         <span className="text-white font-bold text-sm lg:text-base">Präzision</span>
+                         <Crosshair size={16} className="text-[#C41E3A]" />
+                       </div>
+                       <div className="w-full bg-white/10 h-1.5 rounded-full overflow-hidden">
+                         <motion.div initial={{ width: 0 }} whileInView={{ width: "85%" }} transition={{ duration: 1, delay: 0.5 }} className="h-full bg-[#C41E3A] rounded-full" />
+                       </div>
+                     </div>
+                     <div className="bg-black/40 backdrop-blur-md rounded-2xl p-4 border border-white/10 transform transition-transform group-hover:-translate-y-1 delay-75">
+                       <div className="flex justify-between items-center mb-2">
+                         <span className="text-white font-bold text-sm lg:text-base">Geschwindigkeit</span>
+                         <Zap size={16} className="text-[#C41E3A]" />
+                       </div>
+                       <div className="w-full bg-white/10 h-1.5 rounded-full overflow-hidden">
+                         <motion.div initial={{ width: 0 }} whileInView={{ width: "95%" }} transition={{ duration: 1, delay: 0.7 }} className="h-full bg-[#C41E3A] rounded-full" />
+                       </div>
+                     </div>
+                     <div className="bg-black/40 backdrop-blur-md rounded-2xl p-4 border border-white/10 transform transition-transform group-hover:-translate-y-1 delay-150">
+                       <div className="flex justify-between items-center mb-2">
+                         <span className="text-white font-bold text-sm lg:text-base">Belastbarkeit</span>
+                         <Wrench size={16} className="text-[#C41E3A]" />
+                       </div>
+                       <div className="w-full bg-white/10 h-1.5 rounded-full overflow-hidden">
+                         <motion.div initial={{ width: 0 }} whileInView={{ width: "90%" }} transition={{ duration: 1, delay: 0.9 }} className="h-full bg-[#C41E3A] rounded-full" />
+                       </div>
+                     </div>
+                  </div>
+                  <div className="relative z-10 mt-6 lg:mt-8">
+                    <TransitionLink href="/leistungen/fdm-druck">
+                      <MagneticButton className="w-full py-4 bg-white text-black font-bold rounded-xl flex items-center justify-center gap-2 hover:bg-[#C41E3A] hover:text-white transition-colors duration-300">
+                        Mehr zu FDM <ArrowRight size={18} />
+                      </MagneticButton>
+                    </TransitionLink>
+                  </div>
                 </div>
-                <div className="relative z-10 space-y-4">
-                   <div className="bg-black/40 backdrop-blur-md rounded-2xl p-4 border border-white/10 transform transition-transform group-hover:-translate-y-1">
-                     <div className="flex justify-between items-center mb-2">
-                       <span className="text-white font-bold text-sm lg:text-base">Präzision</span>
-                       <Crosshair size={16} className="text-[#C41E3A]" />
-                     </div>
-                     <div className="w-full bg-white/10 h-1.5 rounded-full overflow-hidden">
-                       <motion.div initial={{ width: 0 }} whileInView={{ width: "85%" }} transition={{ duration: 1, delay: 0.5 }} className="h-full bg-[#C41E3A] rounded-full" />
-                     </div>
-                   </div>
-                   <div className="bg-black/40 backdrop-blur-md rounded-2xl p-4 border border-white/10 transform transition-transform group-hover:-translate-y-1 delay-75">
-                     <div className="flex justify-between items-center mb-2">
-                       <span className="text-white font-bold text-sm lg:text-base">Geschwindigkeit</span>
-                       <Zap size={16} className="text-[#C41E3A]" />
-                     </div>
-                     <div className="w-full bg-white/10 h-1.5 rounded-full overflow-hidden">
-                       <motion.div initial={{ width: 0 }} whileInView={{ width: "95%" }} transition={{ duration: 1, delay: 0.7 }} className="h-full bg-[#C41E3A] rounded-full" />
-                     </div>
-                   </div>
-                   <div className="bg-black/40 backdrop-blur-md rounded-2xl p-4 border border-white/10 transform transition-transform group-hover:-translate-y-1 delay-150">
-                     <div className="flex justify-between items-center mb-2">
-                       <span className="text-white font-bold text-sm lg:text-base">Belastbarkeit</span>
-                       <Wrench size={16} className="text-[#C41E3A]" />
-                     </div>
-                     <div className="w-full bg-white/10 h-1.5 rounded-full overflow-hidden">
-                       <motion.div initial={{ width: 0 }} whileInView={{ width: "90%" }} transition={{ duration: 1, delay: 0.9 }} className="h-full bg-[#C41E3A] rounded-full" />
-                     </div>
-                   </div>
-                </div>
-                <div className="relative z-10 mt-6 lg:mt-8">
-                  <TransitionLink href="/leistungen/fdm-druck">
-                    <MagneticButton className="w-full py-4 bg-white text-black font-bold rounded-xl flex items-center justify-center gap-2 hover:bg-[#C41E3A] hover:text-white transition-colors duration-300">
-                      Mehr zu FDM <ArrowRight size={18} />
-                    </MagneticButton>
-                  </TransitionLink>
-                </div>
-              </div>
+              )}
             </div>
           </TiltCard>
 
           {/* Card 3: SLA */}
-          <TiltCard className="w-[85vw] md:w-[70vw] lg:w-[60vw] min-w-[85vw] md:min-w-[700px] lg:min-w-[850px] h-[85vh] lg:h-[80vh] shrink-0 bg-[#141414] border border-white/10" glowColor="rgba(56,189,248,0.2)">
+          <TiltCard className={`${isDesktop ? 'w-[60vw] min-w-[850px] h-[80vh]' : 'w-full max-w-[90vw] h-auto min-h-[70vh]'} shrink-0 bg-[#141414] border border-white/10`} glowColor="rgba(56,189,248,0.2)">
             <div className="flex justify-between items-start w-full">
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 lg:w-16 lg:h-16 rounded-2xl bg-sky-500/10 flex items-center justify-center border border-sky-500/30">
+                <div className="w-12 h-12 lg:w-16 lg:h-16 rounded-2xl bg-sky-500/10 flex items-center justify-center border border-sky-500/30 shrink-0">
                   <Droplets size={32} className="text-sky-500" />
                 </div>
                 <div>
@@ -296,12 +325,12 @@ const HorizontalScrollGallery = () => {
                   <p className="text-sky-500 tracking-wider uppercase text-xs lg:text-sm mt-1 font-bold">Stereolithografie</p>
                 </div>
               </div>
-              <span className="text-7xl lg:text-8xl font-black text-white/5 font-calistoga select-none">02</span>
+              <span className="text-6xl lg:text-8xl font-black text-white/5 font-calistoga select-none ml-4">02</span>
             </div>
             
-            <div className="flex flex-col md:flex-row gap-6 lg:gap-12 mt-6 lg:mt-8 flex-grow min-h-0">
+            <div className={`flex flex-col ${isDesktop ? 'md:flex-row' : ''} gap-6 lg:gap-12 mt-6 lg:mt-8 flex-grow min-h-0`}>
               {/* Text Column with Scroll */}
-              <div className="w-full md:w-[45%] flex flex-col justify-start overflow-y-auto pr-2 md:pr-4 pb-4 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+              <div className={`w-full ${isDesktop ? 'md:w-[45%]' : ''} flex flex-col justify-start overflow-y-auto pr-2 md:pr-4 pb-4 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]`}>
                 <p className="text-white/70 text-sm md:text-base lg:text-lg leading-relaxed mb-6">
                   Wenn absolute Detailtreue und makellose Oberflächen gefordert sind, ist SLA die Methode der Wahl. 
                   Durch die Aushärtung von flüssigem Harz mit einem hochpräzisen UV-Laser entstehen Bauteile mit einer 
@@ -320,62 +349,73 @@ const HorizontalScrollGallery = () => {
                     </div>
                   ))}
                 </div>
+                {!isDesktop && (
+                  <div className="mt-8">
+                    <TransitionLink href="/leistungen/sla-druck">
+                      <MagneticButton className="w-full py-4 bg-white text-black font-bold rounded-xl flex items-center justify-center gap-2 hover:bg-sky-500 hover:text-white transition-colors duration-300">
+                        Mehr zu SLA <ArrowRight size={18} />
+                      </MagneticButton>
+                    </TransitionLink>
+                  </div>
+                )}
               </div>
               
               {/* Visual Column with Scroll */}
-              <div className="hidden md:flex w-full md:w-[55%] relative h-full rounded-3xl overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] border border-white/5 bg-gradient-to-br from-white/5 to-transparent p-6 lg:p-8 flex-col justify-between group">
-                <div className="absolute inset-0 bg-gradient-to-t from-sky-900/20 to-transparent opacity-50 pointer-events-none" />
-                <div className="absolute bottom-0 left-0 right-0 h-32 bg-sky-500/10 blur-2xl transform translate-y-16 group-hover:translate-y-0 transition-transform duration-1000 pointer-events-none" />
+              {isDesktop && (
+                <div className="hidden md:flex w-full md:w-[55%] relative h-full rounded-3xl overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] border border-white/5 bg-gradient-to-br from-white/5 to-transparent p-6 lg:p-8 flex-col justify-between group">
+                  <div className="absolute inset-0 bg-gradient-to-t from-sky-900/20 to-transparent opacity-50 pointer-events-none" />
+                  <div className="absolute bottom-0 left-0 right-0 h-32 bg-sky-500/10 blur-2xl transform translate-y-16 group-hover:translate-y-0 transition-transform duration-1000 pointer-events-none" />
 
-                <div className="relative z-10 flex justify-between items-center text-white/50 mb-4">
-                  <span className="text-xs tracking-widest uppercase">Eigenschaften</span>
-                  <Layers size={16} />
+                  <div className="relative z-10 flex justify-between items-center text-white/50 mb-4">
+                    <span className="text-xs tracking-widest uppercase">Eigenschaften</span>
+                    <Layers size={16} />
+                  </div>
+                  <div className="relative z-10 space-y-4">
+                     <div className="bg-black/40 backdrop-blur-md rounded-2xl p-4 border border-white/10 transform transition-transform group-hover:-translate-y-1">
+                       <div className="flex justify-between items-center mb-2">
+                         <span className="text-white font-bold text-sm lg:text-base">Auflösung</span>
+                         <Maximize size={16} className="text-sky-500" />
+                       </div>
+                       <div className="w-full bg-white/10 h-1.5 rounded-full overflow-hidden">
+                         <motion.div initial={{ width: 0 }} whileInView={{ width: "99%" }} transition={{ duration: 1, delay: 0.5 }} className="h-full bg-sky-500 rounded-full" />
+                       </div>
+                     </div>
+                     <div className="bg-black/40 backdrop-blur-md rounded-2xl p-4 border border-white/10 transform transition-transform group-hover:-translate-y-1 delay-75">
+                       <div className="flex justify-between items-center mb-2">
+                         <span className="text-white font-bold text-sm lg:text-base">Oberflächengüte</span>
+                         <Droplets size={16} className="text-sky-500" />
+                       </div>
+                       <div className="w-full bg-white/10 h-1.5 rounded-full overflow-hidden">
+                         <motion.div initial={{ width: 0 }} whileInView={{ width: "98%" }} transition={{ duration: 1, delay: 0.7 }} className="h-full bg-sky-500 rounded-full" />
+                       </div>
+                     </div>
+                     <div className="bg-black/40 backdrop-blur-md rounded-2xl p-4 border border-white/10 transform transition-transform group-hover:-translate-y-1 delay-150">
+                       <div className="flex justify-between items-center mb-2">
+                         <span className="text-white font-bold text-sm lg:text-base">Materialvielfalt</span>
+                         <Layers size={16} className="text-sky-500" />
+                       </div>
+                       <div className="w-full bg-white/10 h-1.5 rounded-full overflow-hidden">
+                         <motion.div initial={{ width: 0 }} whileInView={{ width: "85%" }} transition={{ duration: 1, delay: 0.9 }} className="h-full bg-sky-500 rounded-full" />
+                       </div>
+                     </div>
+                  </div>
+                  <div className="relative z-10 mt-6 lg:mt-8">
+                    <TransitionLink href="/leistungen/sla-druck">
+                      <MagneticButton className="w-full py-4 bg-white text-black font-bold rounded-xl flex items-center justify-center gap-2 hover:bg-sky-500 hover:text-white transition-colors duration-300">
+                        Mehr zu SLA <ArrowRight size={18} />
+                      </MagneticButton>
+                    </TransitionLink>
+                  </div>
                 </div>
-                <div className="relative z-10 space-y-4">
-                   <div className="bg-black/40 backdrop-blur-md rounded-2xl p-4 border border-white/10 transform transition-transform group-hover:-translate-y-1">
-                     <div className="flex justify-between items-center mb-2">
-                       <span className="text-white font-bold text-sm lg:text-base">Auflösung</span>
-                       <Maximize size={16} className="text-sky-500" />
-                     </div>
-                     <div className="w-full bg-white/10 h-1.5 rounded-full overflow-hidden">
-                       <motion.div initial={{ width: 0 }} whileInView={{ width: "99%" }} transition={{ duration: 1, delay: 0.5 }} className="h-full bg-sky-500 rounded-full" />
-                     </div>
-                   </div>
-                   <div className="bg-black/40 backdrop-blur-md rounded-2xl p-4 border border-white/10 transform transition-transform group-hover:-translate-y-1 delay-75">
-                     <div className="flex justify-between items-center mb-2">
-                       <span className="text-white font-bold text-sm lg:text-base">Oberflächengüte</span>
-                       <Droplets size={16} className="text-sky-500" />
-                     </div>
-                     <div className="w-full bg-white/10 h-1.5 rounded-full overflow-hidden">
-                       <motion.div initial={{ width: 0 }} whileInView={{ width: "98%" }} transition={{ duration: 1, delay: 0.7 }} className="h-full bg-sky-500 rounded-full" />
-                     </div>
-                   </div>
-                   <div className="bg-black/40 backdrop-blur-md rounded-2xl p-4 border border-white/10 transform transition-transform group-hover:-translate-y-1 delay-150">
-                     <div className="flex justify-between items-center mb-2">
-                       <span className="text-white font-bold text-sm lg:text-base">Materialvielfalt</span>
-                       <Layers size={16} className="text-sky-500" />
-                     </div>
-                     <div className="w-full bg-white/10 h-1.5 rounded-full overflow-hidden">
-                       <motion.div initial={{ width: 0 }} whileInView={{ width: "85%" }} transition={{ duration: 1, delay: 0.9 }} className="h-full bg-sky-500 rounded-full" />
-                     </div>
-                   </div>
-                </div>
-                <div className="relative z-10 mt-6 lg:mt-8">
-                  <TransitionLink href="/leistungen/sla-druck">
-                    <MagneticButton className="w-full py-4 bg-white text-black font-bold rounded-xl flex items-center justify-center gap-2 hover:bg-sky-500 hover:text-white transition-colors duration-300">
-                      Mehr zu SLA <ArrowRight size={18} />
-                    </MagneticButton>
-                  </TransitionLink>
-                </div>
-              </div>
+              )}
             </div>
           </TiltCard>
 
           {/* Card 4: 3D-Modellierung */}
-          <TiltCard className="w-[85vw] md:w-[70vw] lg:w-[60vw] min-w-[85vw] md:min-w-[700px] lg:min-w-[850px] h-[85vh] lg:h-[80vh] shrink-0 bg-[#141414] border border-white/10" glowColor="rgba(168,85,247,0.2)">
+          <TiltCard className={`${isDesktop ? 'w-[60vw] min-w-[850px] h-[80vh]' : 'w-full max-w-[90vw] h-auto min-h-[70vh]'} shrink-0 bg-[#141414] border border-white/10`} glowColor="rgba(168,85,247,0.2)">
             <div className="flex justify-between items-start w-full">
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 lg:w-16 lg:h-16 rounded-2xl bg-purple-500/10 flex items-center justify-center border border-purple-500/30">
+                <div className="w-12 h-12 lg:w-16 lg:h-16 rounded-2xl bg-purple-500/10 flex items-center justify-center border border-purple-500/30 shrink-0">
                   <PenTool size={32} className="text-purple-500" />
                 </div>
                 <div>
@@ -383,12 +423,12 @@ const HorizontalScrollGallery = () => {
                   <p className="text-purple-500 tracking-wider uppercase text-xs lg:text-sm mt-1 font-bold">Digital Design & Sculpting</p>
                 </div>
               </div>
-              <span className="text-7xl lg:text-8xl font-black text-white/5 font-calistoga select-none">03</span>
+              <span className="text-6xl lg:text-8xl font-black text-white/5 font-calistoga select-none ml-4">03</span>
             </div>
             
-            <div className="flex flex-col md:flex-row gap-6 lg:gap-12 mt-6 lg:mt-8 flex-grow min-h-0">
+            <div className={`flex flex-col ${isDesktop ? 'md:flex-row' : ''} gap-6 lg:gap-12 mt-6 lg:mt-8 flex-grow min-h-0`}>
               {/* Text Column with Scroll */}
-              <div className="w-full md:w-[45%] flex flex-col justify-start overflow-y-auto pr-2 md:pr-4 pb-4 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+              <div className={`w-full ${isDesktop ? 'md:w-[45%]' : ''} flex flex-col justify-start overflow-y-auto pr-2 md:pr-4 pb-4 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]`}>
                 <p className="text-white/70 text-sm md:text-base lg:text-lg leading-relaxed mb-6">
                   Die perfekte Idee braucht das perfekte digitale Fundament. Unsere Experten verwandeln Ihre Skizzen, 
                   Konzepte oder physischen Objekte in hochpräzise 3D-Modelle. Ob organische Formen für Kunst und Design 
@@ -407,62 +447,73 @@ const HorizontalScrollGallery = () => {
                     </div>
                   ))}
                 </div>
+                {!isDesktop && (
+                  <div className="mt-8">
+                    <TransitionLink href="/leistungen/3d-modellierung">
+                      <MagneticButton className="w-full py-4 bg-white text-black font-bold rounded-xl flex items-center justify-center gap-2 hover:bg-purple-500 hover:text-white transition-colors duration-300">
+                        Modellierung anfragen <ArrowRight size={18} />
+                      </MagneticButton>
+                    </TransitionLink>
+                  </div>
+                )}
               </div>
               
-              {/* Visual Column with Scroll */}
-              <div className="hidden md:flex w-full md:w-[55%] relative h-full rounded-3xl overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] border border-white/5 bg-gradient-to-br from-white/5 to-transparent p-6 lg:p-8 flex-col justify-between group">
-                <svg className="absolute inset-0 w-full h-full opacity-10 group-hover:opacity-20 transition-opacity duration-1000 pointer-events-none" viewBox="0 0 100 100" preserveAspectRatio="none">
-                  <path d="M0,50 Q25,25 50,50 T100,50 M0,20 Q25,80 50,20 T100,80 M0,80 Q25,20 50,80 T100,20" fill="none" stroke="white" strokeWidth="0.5" vectorEffect="non-scaling-stroke"/>
-                  <path d="M50,0 L50,100 M20,0 L20,100 M80,0 L80,100" fill="none" stroke="white" strokeWidth="0.5" vectorEffect="non-scaling-stroke"/>
-                </svg>
+              {/* Visual Column */}
+              {isDesktop && (
+                <div className="hidden md:flex w-full md:w-[55%] relative h-full rounded-3xl overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] border border-white/5 bg-gradient-to-br from-white/5 to-transparent p-6 lg:p-8 flex-col justify-between group">
+                  <svg className="absolute inset-0 w-full h-full opacity-10 group-hover:opacity-20 transition-opacity duration-1000 pointer-events-none" viewBox="0 0 100 100" preserveAspectRatio="none">
+                    <path d="M0,50 Q25,25 50,50 T100,50 M0,20 Q25,80 50,20 T100,80 M0,80 Q25,20 50,80 T100,20" fill="none" stroke="white" strokeWidth="0.5" vectorEffect="non-scaling-stroke"/>
+                    <path d="M50,0 L50,100 M20,0 L20,100 M80,0 L80,100" fill="none" stroke="white" strokeWidth="0.5" vectorEffect="non-scaling-stroke"/>
+                  </svg>
 
-                <div className="relative z-10 flex justify-between items-center text-white/50 mb-4">
-                  <span className="text-xs tracking-widest uppercase">Workflow</span>
-                  <Cpu size={16} />
-                </div>
-                
-                <div className="relative z-10 space-y-4 flex-grow flex flex-col justify-center">
-                   <div className="flex items-center gap-4 bg-black/40 backdrop-blur-md rounded-2xl p-4 border border-white/10">
-                     <div className="w-8 h-8 lg:w-10 lg:h-10 rounded-full bg-purple-500/20 flex items-center justify-center border border-purple-500/50 text-purple-400 font-bold shrink-0">1</div>
-                     <div>
-                       <h4 className="text-white font-bold text-sm lg:text-base">Konzept & Analyse</h4>
-                       <p className="text-white/50 text-xs lg:text-sm">Machbarkeitsstudie & Planung</p>
+                  <div className="relative z-10 flex justify-between items-center text-white/50 mb-4">
+                    <span className="text-xs tracking-widest uppercase">Workflow</span>
+                    <Cpu size={16} />
+                  </div>
+                  
+                  <div className="relative z-10 space-y-4 flex-grow flex flex-col justify-center">
+                     <div className="flex items-center gap-4 bg-black/40 backdrop-blur-md rounded-2xl p-4 border border-white/10">
+                       <div className="w-8 h-8 lg:w-10 lg:h-10 rounded-full bg-purple-500/20 flex items-center justify-center border border-purple-500/50 text-purple-400 font-bold shrink-0">1</div>
+                       <div>
+                         <h4 className="text-white font-bold text-sm lg:text-base">Konzept & Analyse</h4>
+                         <p className="text-white/50 text-xs lg:text-sm">Machbarkeitsstudie & Planung</p>
+                       </div>
                      </div>
-                   </div>
-                   <div className="ml-4 lg:ml-5 w-0.5 h-3 lg:h-4 bg-gradient-to-b from-purple-500/50 to-purple-500/10" />
-                   <div className="flex items-center gap-4 bg-black/40 backdrop-blur-md rounded-2xl p-4 border border-white/10">
-                     <div className="w-8 h-8 lg:w-10 lg:h-10 rounded-full bg-purple-500/20 flex items-center justify-center border border-purple-500/50 text-purple-400 font-bold shrink-0">2</div>
-                     <div>
-                       <h4 className="text-white font-bold text-sm lg:text-base">Digitaler Entwurf</h4>
-                       <p className="text-white/50 text-xs lg:text-sm">CAD / Polygon / Sculpting</p>
+                     <div className="ml-4 lg:ml-5 w-0.5 h-3 lg:h-4 bg-gradient-to-b from-purple-500/50 to-purple-500/10" />
+                     <div className="flex items-center gap-4 bg-black/40 backdrop-blur-md rounded-2xl p-4 border border-white/10">
+                       <div className="w-8 h-8 lg:w-10 lg:h-10 rounded-full bg-purple-500/20 flex items-center justify-center border border-purple-500/50 text-purple-400 font-bold shrink-0">2</div>
+                       <div>
+                         <h4 className="text-white font-bold text-sm lg:text-base">Digitaler Entwurf</h4>
+                         <p className="text-white/50 text-xs lg:text-sm">CAD / Polygon / Sculpting</p>
+                       </div>
                      </div>
-                   </div>
-                   <div className="ml-4 lg:ml-5 w-0.5 h-3 lg:h-4 bg-gradient-to-b from-purple-500/50 to-purple-500/10" />
-                   <div className="flex items-center gap-4 bg-black/40 backdrop-blur-md rounded-2xl p-4 border border-white/10">
-                     <div className="w-8 h-8 lg:w-10 lg:h-10 rounded-full bg-purple-500/20 flex items-center justify-center border border-purple-500/50 text-purple-400 font-bold shrink-0">3</div>
-                     <div>
-                       <h4 className="text-white font-bold text-sm lg:text-base">Optimierung</h4>
-                       <p className="text-white/50 text-xs lg:text-sm">Druckvorbereitung & Toleranzen</p>
+                     <div className="ml-4 lg:ml-5 w-0.5 h-3 lg:h-4 bg-gradient-to-b from-purple-500/50 to-purple-500/10" />
+                     <div className="flex items-center gap-4 bg-black/40 backdrop-blur-md rounded-2xl p-4 border border-white/10">
+                       <div className="w-8 h-8 lg:w-10 lg:h-10 rounded-full bg-purple-500/20 flex items-center justify-center border border-purple-500/50 text-purple-400 font-bold shrink-0">3</div>
+                       <div>
+                         <h4 className="text-white font-bold text-sm lg:text-base">Optimierung</h4>
+                         <p className="text-white/50 text-xs lg:text-sm">Druckvorbereitung & Toleranzen</p>
+                       </div>
                      </div>
-                   </div>
-                </div>
+                  </div>
 
-                <div className="relative z-10 mt-6 lg:mt-8">
-                  <TransitionLink href="/leistungen/3d-modellierung">
-                    <MagneticButton className="w-full py-4 bg-white text-black font-bold rounded-xl flex items-center justify-center gap-2 hover:bg-purple-500 hover:text-white transition-colors duration-300">
-                      Modellierung anfragen <ArrowRight size={18} />
-                    </MagneticButton>
-                  </TransitionLink>
+                  <div className="relative z-10 mt-6 lg:mt-8">
+                    <TransitionLink href="/leistungen/3d-modellierung">
+                      <MagneticButton className="w-full py-4 bg-white text-black font-bold rounded-xl flex items-center justify-center gap-2 hover:bg-purple-500 hover:text-white transition-colors duration-300">
+                        Modellierung anfragen <ArrowRight size={18} />
+                      </MagneticButton>
+                    </TransitionLink>
+                  </div>
                 </div>
-              </div>
+              )}
             </div>
           </TiltCard>
 
           {/* Card 5: Konstruktion */}
-          <TiltCard className="w-[85vw] md:w-[70vw] lg:w-[60vw] min-w-[85vw] md:min-w-[700px] lg:min-w-[850px] h-[85vh] lg:h-[80vh] shrink-0 bg-[#141414] border border-white/10" glowColor="rgba(16,185,129,0.2)">
+          <TiltCard className={`${isDesktop ? 'w-[60vw] min-w-[850px] h-[80vh]' : 'w-full max-w-[90vw] h-auto min-h-[70vh]'} shrink-0 bg-[#141414] border border-white/10`} glowColor="rgba(16,185,129,0.2)">
             <div className="flex justify-between items-start w-full">
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 lg:w-16 lg:h-16 rounded-2xl bg-emerald-500/10 flex items-center justify-center border border-emerald-500/30">
+                <div className="w-12 h-12 lg:w-16 lg:h-16 rounded-2xl bg-emerald-500/10 flex items-center justify-center border border-emerald-500/30 shrink-0">
                   <Ruler size={32} className="text-emerald-500" />
                 </div>
                 <div>
@@ -470,12 +521,12 @@ const HorizontalScrollGallery = () => {
                   <p className="text-emerald-500 tracking-wider uppercase text-xs lg:text-sm mt-1 font-bold">Engineering & Mechanik</p>
                 </div>
               </div>
-              <span className="text-7xl lg:text-8xl font-black text-white/5 font-calistoga select-none">04</span>
+              <span className="text-6xl lg:text-8xl font-black text-white/5 font-calistoga select-none ml-4">04</span>
             </div>
             
-            <div className="flex flex-col md:flex-row gap-6 lg:gap-12 mt-6 lg:mt-8 flex-grow min-h-0">
+            <div className={`flex flex-col ${isDesktop ? 'md:flex-row' : ''} gap-6 lg:gap-12 mt-6 lg:mt-8 flex-grow min-h-0`}>
               {/* Text Column with Scroll */}
-              <div className="w-full md:w-[45%] flex flex-col justify-start overflow-y-auto pr-2 md:pr-4 pb-4 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+              <div className={`w-full ${isDesktop ? 'md:w-[45%]' : ''} flex flex-col justify-start overflow-y-auto pr-2 md:pr-4 pb-4 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]`}>
                 <p className="text-white/70 text-sm md:text-base lg:text-lg leading-relaxed mb-6">
                   Mehr als nur Form: Funktion. Wir konstruieren Baugruppen, mechanische Systeme und Gehäuse, 
                   die nicht nur gut aussehen, sondern in der realen Welt funktionieren. Unter Berücksichtigung 
@@ -495,57 +546,68 @@ const HorizontalScrollGallery = () => {
                     </div>
                   ))}
                 </div>
+                {!isDesktop && (
+                  <div className="mt-8">
+                    <TransitionLink href="/leistungen/konstruktion">
+                      <MagneticButton className="w-full py-4 bg-white text-black font-bold rounded-xl flex items-center justify-center gap-2 hover:bg-emerald-500 hover:text-white transition-colors duration-300">
+                        Projekt besprechen <ArrowRight size={18} />
+                      </MagneticButton>
+                    </TransitionLink>
+                  </div>
+                )}
               </div>
               
-              {/* Visual Column with Scroll */}
-              <div className="hidden md:flex w-full md:w-[55%] relative h-full rounded-3xl overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] border border-white/5 bg-gradient-to-br from-white/5 to-transparent p-6 lg:p-8 flex-col justify-between group">
-                <div className="absolute inset-0 opacity-10 pointer-events-none" 
-                     style={{ backgroundImage: 'linear-gradient(rgba(255,255,255,0.2) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.2) 1px, transparent 1px)', backgroundSize: '20px 20px' }}>
-                </div>
-                
-                <div className="relative z-10 flex justify-between items-center text-white/50 mb-4">
-                  <span className="text-xs tracking-widest uppercase">Fokus</span>
-                  <Wrench size={16} />
-                </div>
-                
-                <div className="relative z-10 space-y-4 flex-grow flex flex-col justify-center">
-                   <div className="grid grid-cols-2 gap-3 lg:gap-4">
-                     <div className="bg-black/40 backdrop-blur-md rounded-2xl p-4 lg:p-6 border border-white/10 flex flex-col items-center text-center group-hover:border-emerald-500/30 transition-colors">
-                       <Settings className="text-emerald-500 mb-2 lg:mb-3" size={20} />
-                       <h4 className="text-white font-bold text-xs lg:text-sm">Passungen</h4>
-                       <p className="text-white/50 text-[10px] lg:text-xs mt-1">Exakte Toleranzen</p>
+              {/* Visual Column */}
+              {isDesktop && (
+                <div className="hidden md:flex w-full md:w-[55%] relative h-full rounded-3xl overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] border border-white/5 bg-gradient-to-br from-white/5 to-transparent p-6 lg:p-8 flex-col justify-between group">
+                  <div className="absolute inset-0 opacity-10 pointer-events-none" 
+                       style={{ backgroundImage: 'linear-gradient(rgba(255,255,255,0.2) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.2) 1px, transparent 1px)', backgroundSize: '20px 20px' }}>
+                  </div>
+                  
+                  <div className="relative z-10 flex justify-between items-center text-white/50 mb-4">
+                    <span className="text-xs tracking-widest uppercase">Fokus</span>
+                    <Wrench size={16} />
+                  </div>
+                  
+                  <div className="relative z-10 space-y-4 flex-grow flex flex-col justify-center">
+                     <div className="grid grid-cols-2 gap-3 lg:gap-4">
+                       <div className="bg-black/40 backdrop-blur-md rounded-2xl p-4 lg:p-6 border border-white/10 flex flex-col items-center text-center group-hover:border-emerald-500/30 transition-colors">
+                         <Settings className="text-emerald-500 mb-2 lg:mb-3" size={20} />
+                         <h4 className="text-white font-bold text-xs lg:text-sm">Passungen</h4>
+                         <p className="text-white/50 text-[10px] lg:text-xs mt-1">Exakte Toleranzen</p>
+                       </div>
+                       <div className="bg-black/40 backdrop-blur-md rounded-2xl p-4 lg:p-6 border border-white/10 flex flex-col items-center text-center group-hover:border-emerald-500/30 transition-colors">
+                         <Layers className="text-emerald-500 mb-2 lg:mb-3" size={20} />
+                         <h4 className="text-white font-bold text-xs lg:text-sm">Baugruppen</h4>
+                         <p className="text-white/50 text-[10px] lg:text-xs mt-1">Komplexe Systeme</p>
+                       </div>
+                       <div className="bg-black/40 backdrop-blur-md rounded-2xl p-4 lg:p-6 border border-white/10 flex flex-col items-center text-center group-hover:border-emerald-500/30 transition-colors">
+                         <Zap className="text-emerald-500 mb-2 lg:mb-3" size={20} />
+                         <h4 className="text-white font-bold text-xs lg:text-sm">Leichtbau</h4>
+                         <p className="text-white/50 text-[10px] lg:text-xs mt-1">Topologie optimiert</p>
+                       </div>
+                       <div className="bg-black/40 backdrop-blur-md rounded-2xl p-4 lg:p-6 border border-white/10 flex flex-col items-center text-center group-hover:border-emerald-500/30 transition-colors">
+                         <CheckCircle2 className="text-emerald-500 mb-2 lg:mb-3" size={20} />
+                         <h4 className="text-white font-bold text-xs lg:text-sm">Prüfung</h4>
+                         <p className="text-white/50 text-[10px] lg:text-xs mt-1">DfAM validiert</p>
+                       </div>
                      </div>
-                     <div className="bg-black/40 backdrop-blur-md rounded-2xl p-4 lg:p-6 border border-white/10 flex flex-col items-center text-center group-hover:border-emerald-500/30 transition-colors">
-                       <Layers className="text-emerald-500 mb-2 lg:mb-3" size={20} />
-                       <h4 className="text-white font-bold text-xs lg:text-sm">Baugruppen</h4>
-                       <p className="text-white/50 text-[10px] lg:text-xs mt-1">Komplexe Systeme</p>
-                     </div>
-                     <div className="bg-black/40 backdrop-blur-md rounded-2xl p-4 lg:p-6 border border-white/10 flex flex-col items-center text-center group-hover:border-emerald-500/30 transition-colors">
-                       <Zap className="text-emerald-500 mb-2 lg:mb-3" size={20} />
-                       <h4 className="text-white font-bold text-xs lg:text-sm">Leichtbau</h4>
-                       <p className="text-white/50 text-[10px] lg:text-xs mt-1">Topologie optimiert</p>
-                     </div>
-                     <div className="bg-black/40 backdrop-blur-md rounded-2xl p-4 lg:p-6 border border-white/10 flex flex-col items-center text-center group-hover:border-emerald-500/30 transition-colors">
-                       <CheckCircle2 className="text-emerald-500 mb-2 lg:mb-3" size={20} />
-                       <h4 className="text-white font-bold text-xs lg:text-sm">Prüfung</h4>
-                       <p className="text-white/50 text-[10px] lg:text-xs mt-1">DfAM validiert</p>
-                     </div>
-                   </div>
-                </div>
+                  </div>
 
-                <div className="relative z-10 mt-6 lg:mt-8">
-                  <TransitionLink href="/leistungen/konstruktion">
-                    <MagneticButton className="w-full py-4 bg-white text-black font-bold rounded-xl flex items-center justify-center gap-2 hover:bg-emerald-500 hover:text-white transition-colors duration-300">
-                      Projekt besprechen <ArrowRight size={18} />
-                    </MagneticButton>
-                  </TransitionLink>
+                  <div className="relative z-10 mt-6 lg:mt-8">
+                    <TransitionLink href="/leistungen/konstruktion">
+                      <MagneticButton className="w-full py-4 bg-white text-black font-bold rounded-xl flex items-center justify-center gap-2 hover:bg-emerald-500 hover:text-white transition-colors duration-300">
+                        Projekt besprechen <ArrowRight size={18} />
+                      </MagneticButton>
+                    </TransitionLink>
+                  </div>
                 </div>
-              </div>
+              )}
             </div>
           </TiltCard>
 
           {/* Card 6: Outro / Call to Action */}
-          <div className="w-[30vw] min-w-[350px] lg:min-w-[400px] h-[80vh] flex flex-col justify-center items-center shrink-0 pr-16 lg:pr-32">
+          <div className={`${isDesktop ? 'w-[30vw] min-w-[350px] lg:min-w-[400px] h-[80vh] justify-center pr-16 lg:pr-32' : 'w-full py-24 items-center px-4'} flex flex-col items-center shrink-0`}>
             <div className="w-24 h-24 lg:w-32 lg:h-32 rounded-full bg-[#C41E3A]/20 flex items-center justify-center mb-8 relative">
               <div className="absolute inset-0 rounded-full border border-[#C41E3A] animate-[spin_10s_linear_infinite]" style={{ borderStyle: 'dashed' }} />
               <Zap size={40} className="text-[#C41E3A]" />
