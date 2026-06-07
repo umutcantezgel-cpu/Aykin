@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useRef } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { SubpageHero } from '@/components/ui/SubpageHero';
 import { Box, Layers, Play, Cpu, Zap, Maximize, Printer, ShieldCheck, ArrowRight, ArrowDown } from 'lucide-react';
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
@@ -33,6 +33,15 @@ export default function ProduktePage() {
   const scale3 = useTransform(smoothProgress, [0.2, 0.5], [0.6, 1.8]);
   const rotateX3 = useTransform(smoothProgress, [0.2, 0.5], [-40, 20]);
 
+  const [isDesktop, setIsDesktop] = useState(true);
+
+  useEffect(() => {
+    const checkSize = () => setIsDesktop(window.innerWidth >= 1024);
+    checkSize();
+    window.addEventListener('resize', checkSize);
+    return () => window.removeEventListener('resize', checkSize);
+  }, []);
+
   return (
     <main className="bg-white min-h-screen overflow-x-clip w-full max-w-full selection:bg-[#C41E3A] selection:text-white">
       <SubpageHero 
@@ -42,24 +51,26 @@ export default function ProduktePage() {
       />
 
       {/* 3D PARALLAX GALLERY - SCROLLYTELLING CONTAINER */}
-      <section ref={containerRef} className="relative h-[300vh] bg-[#1A1A1A] w-full max-w-full overflow-clip">
-        <div className="sticky top-0 h-screen w-full overflow-hidden flex flex-col items-center justify-center perspective-[1200px]">
+      <section ref={containerRef} className={`relative ${isDesktop ? 'h-[300vh]' : 'h-auto py-24'} bg-[#1A1A1A] w-full max-w-full overflow-clip`}>
+        <div className={`${isDesktop ? 'sticky top-0 h-screen overflow-hidden flex-col justify-center perspective-[1200px]' : 'relative flex-col gap-12 perspective-none'} w-full flex items-center`}>
           
-          <motion.div className="absolute inset-0 z-0 bg-grid-white/[0.03] bg-[length:60px_60px]" />
+          <motion.div className={`absolute inset-0 z-0 bg-grid-white/[0.03] bg-[length:60px_60px] ${!isDesktop && 'bg-fixed'}`} />
           
-          <div className="absolute top-10 flex flex-col items-center justify-center pointer-events-none z-50">
-             <motion.div 
-               style={{ opacity: useTransform(smoothProgress, [0, 0.05], [1, 0]) }}
-               className="flex flex-col items-center gap-4 text-white/50"
-             >
-                <span className="font-calistoga tracking-widest text-sm">SCROLL TO EXPLORE</span>
-                <ArrowDown className="animate-bounce" />
-             </motion.div>
-          </div>
+          {isDesktop && (
+            <div className="absolute top-10 flex flex-col items-center justify-center pointer-events-none z-50">
+               <motion.div 
+                 style={{ opacity: useTransform(smoothProgress, [0, 0.05], [1, 0]) }}
+                 className="flex flex-col items-center gap-4 text-white/50"
+               >
+                  <span className="font-calistoga tracking-widest text-sm">SCROLL TO EXPLORE</span>
+                  <ArrowDown className="animate-bounce" />
+               </motion.div>
+            </div>
+          )}
 
           <motion.div 
-            style={{ z: z1, opacity: opacity1, scale: scale1, rotateX: rotateX1 }}
-            className="absolute w-[90%] max-w-4xl aspect-[4/5] sm:aspect-square md:aspect-video bg-gradient-to-br from-[#2a2a2a] to-[#1A1A1A] border border-white/10 rounded-[2rem] md:rounded-[3rem] p-6 md:p-16 shadow-[0_30px_100px_rgba(0,0,0,0.8)] flex flex-col items-center justify-center gap-4 md:gap-8 overflow-hidden"
+            style={isDesktop ? { z: z1, opacity: opacity1, scale: scale1, rotateX: rotateX1 } : {}}
+            className={`${isDesktop ? 'absolute' : 'relative'} w-[90%] max-w-4xl aspect-[4/5] sm:aspect-square md:aspect-video bg-gradient-to-br from-[#2a2a2a] to-[#1A1A1A] border border-white/10 rounded-[2rem] md:rounded-[3rem] p-6 md:p-16 shadow-[0_30px_100px_rgba(0,0,0,0.8)] flex flex-col items-center justify-center gap-4 md:gap-8 overflow-hidden z-10`}
           >
             <div className="w-20 h-20 md:w-28 md:h-28 rounded-full bg-[#C41E3A]/20 flex items-center justify-center border border-[#C41E3A]/50 shrink-0">
               <Box className="w-8 h-8 md:w-14 md:h-14 text-[#C41E3A]" />
@@ -69,8 +80,8 @@ export default function ProduktePage() {
           </motion.div>
 
           <motion.div 
-            style={{ z: z2, opacity: opacity2, scale: scale2, rotateX: rotateX2 }}
-            className="absolute w-[90%] max-w-4xl aspect-[4/5] sm:aspect-square md:aspect-video bg-gradient-to-br from-[#FAF8F5] to-white border border-[#E8D5C4] rounded-[2rem] md:rounded-[3rem] p-6 md:p-16 shadow-[0_30px_100px_rgba(0,0,0,0.3)] flex flex-col items-center justify-center gap-4 md:gap-8 overflow-hidden"
+            style={isDesktop ? { z: z2, opacity: opacity2, scale: scale2, rotateX: rotateX2 } : {}}
+            className={`${isDesktop ? 'absolute' : 'relative'} w-[90%] max-w-4xl aspect-[4/5] sm:aspect-square md:aspect-video bg-gradient-to-br from-[#FAF8F5] to-white border border-[#E8D5C4] rounded-[2rem] md:rounded-[3rem] p-6 md:p-16 shadow-[0_30px_100px_rgba(0,0,0,0.3)] flex flex-col items-center justify-center gap-4 md:gap-8 overflow-hidden z-20`}
           >
             <div className="w-20 h-20 md:w-28 md:h-28 rounded-full bg-[#1A1A1A]/5 flex items-center justify-center border border-[#1A1A1A]/10 shrink-0">
               <Layers className="w-8 h-8 md:w-14 md:h-14 text-[#1A1A1A]" />
@@ -80,8 +91,8 @@ export default function ProduktePage() {
           </motion.div>
 
           <motion.div 
-            style={{ z: z3, opacity: opacity3, scale: scale3, rotateX: rotateX3 }}
-            className="absolute w-[90%] max-w-4xl aspect-[4/5] sm:aspect-square md:aspect-video bg-gradient-to-br from-[#C41E3A] to-[#9a152d] border border-white/20 rounded-[2rem] md:rounded-[3rem] p-6 md:p-16 shadow-[0_30px_100px_rgba(196,30,58,0.5)] flex flex-col items-center justify-center gap-4 md:gap-8 text-white overflow-hidden"
+            style={isDesktop ? { z: z3, opacity: opacity3, scale: scale3, rotateX: rotateX3 } : {}}
+            className={`${isDesktop ? 'absolute' : 'relative'} w-[90%] max-w-4xl aspect-[4/5] sm:aspect-square md:aspect-video bg-gradient-to-br from-[#C41E3A] to-[#9a152d] border border-white/20 rounded-[2rem] md:rounded-[3rem] p-6 md:p-16 shadow-[0_30px_100px_rgba(196,30,58,0.5)] flex flex-col items-center justify-center gap-4 md:gap-8 text-white overflow-hidden z-30`}
           >
             <div className="w-20 h-20 md:w-28 md:h-28 rounded-full bg-white/10 flex items-center justify-center border border-white/20 backdrop-blur-sm shrink-0">
               <Play className="w-8 h-8 md:w-14 md:h-14 text-white fill-white" />
