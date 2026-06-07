@@ -409,7 +409,7 @@ export default function ShowcasePage() {
   });
 
   return (
-    <main className="bg-[#FAF8F5] min-h-screen relative overflow-hidden w-full max-w-full">
+    <main className="bg-[#FAF8F5] min-h-screen relative overflow-x-hidden w-full max-w-full">
       {/* Progress Bar */}
       <motion.div
         className="fixed top-0 left-0 right-0 h-1.5 bg-[#1A1A1A] transform origin-left z-50 max-w-full"

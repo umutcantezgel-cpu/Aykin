@@ -575,7 +575,7 @@ const HorizontalScrollGallery = () => {
 
 export default function ServicesPage() {
   return (
-    <main className="bg-white selection:bg-[#C41E3A] selection:text-white">
+    <main className="bg-white selection:bg-[#C41E3A] selection:text-white overflow-x-hidden w-full max-w-full">
       {/* Dynamic Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
         <div className="absolute inset-0 bg-[#FAF8F5]">

@@ -34,7 +34,7 @@ export function MobileMenu({ isOpen, onClose, pathname }: MobileMenuProps) {
           animate={prefersReducedMotion ? { opacity: 1 } : { opacity: 1, y: 0, filter: 'blur(0px)' }}
           exit={prefersReducedMotion ? { opacity: 0 } : { opacity: 0, y: -20, filter: 'blur(10px)' }}
           transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-          className="fixed inset-0 z-[890] bg-[#FAF8F5]/95 backdrop-blur-2xl pt-28 px-6 pb-6 flex flex-col overflow-y-auto"
+          className="fixed inset-0 z-[9998] bg-[#FAF8F5]/95 backdrop-blur-2xl pt-28 px-6 pb-6 flex flex-col overflow-y-auto overflow-x-hidden"
         >
           {/* Sparse Background Blob */}
           <FloatingBlob 

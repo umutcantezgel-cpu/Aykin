@@ -281,7 +281,7 @@ export default function SupportPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#FAF8F5] relative overflow-hidden selection:bg-[#C41E3A] selection:text-white" ref={containerRef}>
+    <div className="min-h-screen bg-[#FAF8F5] relative overflow-x-hidden w-full max-w-full selection:bg-[#C41E3A] selection:text-white" ref={containerRef}>
       <TreeBackground />
       
       {/* Hero Header */}

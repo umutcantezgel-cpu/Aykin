@@ -34,7 +34,7 @@ export default function HomePage() {
   const { bestsellers, reviews, config } = AYKIN_DATA;
 
   return (
-    <div className="animate-fade-in overflow-hidden w-full max-w-[100vw]">
+    <div className="animate-fade-in overflow-x-hidden w-full max-w-full">
       {/* ─── Hero Wrapper ──────────────────────────────────────────────── */}
       <div className="relative w-full overflow-hidden max-w-[100vw]">
         <Hero />

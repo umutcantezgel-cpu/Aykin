@@ -40,7 +40,7 @@ export default function AboutPage() {
             className="flex flex-col md:flex-row gap-12 md:gap-16 items-start"
           >
             <div className="w-full md:w-1/3 text-center md:text-left">
-              <h2 className="font-calistoga text-5xl md:text-7xl text-[#1A1A1A] leading-[1.1]">
+              <h2 className="font-calistoga text-4xl sm:text-5xl md:text-7xl text-[#1A1A1A] leading-[1.1] break-words hyphens-auto">
                 Präzision aus <span className="text-[#C41E3A]">Leidenschaft</span>.
               </h2>
             </div>

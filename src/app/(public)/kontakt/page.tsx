@@ -9,7 +9,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 export default function ContactPage() {
   return (
-    <main className="min-h-screen bg-white overflow-x-hidden max-w-full">
+    <main className="min-h-screen bg-white overflow-x-hidden w-full max-w-full">
       <SubpageHero 
         label="KONTAKT"
         title="Sag Hallo zu Aykin."

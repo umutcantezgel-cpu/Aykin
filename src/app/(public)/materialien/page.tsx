@@ -414,7 +414,7 @@ export default function MaterialienLexikonPage() {
   }, []);
 
   return (
-    <main className="bg-[#FAF8F5] min-h-screen relative overflow-x-hidden max-w-full">
+    <main className="bg-[#FAF8F5] min-h-screen relative overflow-x-hidden w-full max-w-full">
       {/* Global Scroll Progress Bar */}
       <motion.div
         className="fixed top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-[#C41E3A] via-[#E07A5F] to-[#81B29A] transform origin-left z-50"

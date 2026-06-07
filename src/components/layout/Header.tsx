@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
 import { User, ShoppingBag } from "lucide-react";
 import { Logo } from "@/components/atoms/Logo";
-import { HamburgerIcon } from "@/components/atoms/icons";
+import { HamburgerIcon, CloseBittenIcon } from "@/components/atoms/icons";
 import { TransitionLink } from "@/components/ui/TransitionLink";
 import { PrimaryCTA } from "@/components/atoms/buttons";
 import { useStore } from "@/store/useStore";
@@ -57,7 +57,7 @@ export function Header() {
       <ScrollProgressBar />
       
       {/* Wrapper fixed to top, acts as bounds for the floating island */}
-      <div className="fixed top-0 left-0 right-0 z-[900] flex flex-col items-center pointer-events-none">
+      <div className="fixed top-0 left-0 right-0 z-[9999] flex flex-col items-center pointer-events-none">
         {settings?.bannerText && (
           <div className="w-full pointer-events-auto">
             <PromoBanner text={settings.bannerText} />
@@ -181,9 +181,13 @@ export function Header() {
               <button 
                 className="w-10 h-10 flex items-center justify-center bg-transparent border-none text-charcoal"
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                aria-label="Menü öffnen"
+                aria-label={mobileMenuOpen ? "Menü schließen" : "Menü öffnen"}
               >
-                <HamburgerIcon className="w-7 h-7" />
+                {mobileMenuOpen ? (
+                  <CloseBittenIcon className="w-7 h-7" />
+                ) : (
+                  <HamburgerIcon className="w-7 h-7" />
+                )}
               </button>
             </div>
           </motion.div>

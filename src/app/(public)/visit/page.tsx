@@ -73,7 +73,7 @@ export default function VisitPage() {
   const heroY = useTransform(scrollYProgress, [0, 0.1], [0, 100]);
 
   return (
-    <div ref={containerRef} className="min-h-screen bg-[#FAF8F5] relative max-w-full overflow-x-hidden">
+    <div ref={containerRef} className="min-h-screen bg-[#FAF8F5] relative w-full max-w-full overflow-x-hidden">
       {/* MASSIVE HERO PARALLAX SECTION */}
       <motion.section 
         style={{ opacity: heroOpacity, scale: heroScale, y: heroY }}

@@ -42,9 +42,9 @@ export default function CookieConsentBanner() {
             translations: {
               de: {
                 consentModal: {
-                  title: "🧇 Cookies & Datenschutz",
+                  title: "🍪 Cookies für dich!",
                   description:
-                    'Hey! Wir verwenden Cookies, um dir das beste Erlebnis auf unserer Website zu bieten. Du entscheidest selbst, welche Kategorien du zulassen möchtest. Mehr dazu in unserer <a href="/legal#datenschutz" class="cc-link">Datenschutzerklärung</a>.',
+                    'Wir verwenden Cookies, um dir das beste Erlebnis auf unserer Website zu bieten. Manche sind essenziell, andere helfen uns, unseren Service zu verbessern. Bist du einverstanden? Mehr dazu in unserer <a href="/legal#datenschutz" class="cc-link">Datenschutzerklärung</a>.',
                   acceptAllBtn: "Alle akzeptieren",
                   acceptNecessaryBtn: "Nur Notwendige",
                   showPreferencesBtn: "Einstellungen anpassen",
